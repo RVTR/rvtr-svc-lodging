@@ -6,6 +6,7 @@ jobs:
   restore:
     name: restore_aspnet
     runs-on: ubuntu-18.04
+    if: '!github.event.repository.fork'
     steps:
       - name: actions_checkout
         uses: actions/checkout@v2.1.0
@@ -22,6 +23,7 @@ jobs:
     name: build_aspnet
     needs: restore
     runs-on: ubuntu-18.04
+    if: '!github.event.repository.fork'
     steps:
       - name: actions_checkout
         uses: actions/checkout@v2.1.0
@@ -38,6 +40,7 @@ jobs:
     name: test_aspnet
     needs: restore
     runs-on: ubuntu-18.04
+    if: '!github.event.repository.fork'
     steps:
       - name: actions_checkout
         uses: actions/checkout@v2.1.0
@@ -70,6 +73,7 @@ jobs:
     name: analyze_aspnet
     needs: [build, test]
     runs-on: ubuntu-18.04
+    if: '!github.event.repository.fork'
     steps:
       - name: actions_checkout
         uses: actions/checkout@v2.1.0

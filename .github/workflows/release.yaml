@@ -6,6 +6,7 @@ jobs:
   restore:
     name: restore_aspnet
     runs-on: ubuntu-18.04
+    if: '!github.event.repository.fork'
     steps:
       - name: actions_checkout
         uses: actions/checkout@v2.1.0
@@ -22,6 +23,7 @@ jobs:
     name: build_aspnet
     needs: restore
     runs-on: ubuntu-18.04
+    if: '!github.event.repository.fork'
     steps:
       - name: actions_checkout
         uses: actions/checkout@v2.1.0
@@ -51,6 +53,7 @@ jobs:
     name: test_aspnet
     needs: restore
     runs-on: ubuntu-18.04
+    if: '!github.event.repository.fork'
     steps:
       - name: actions_checkout
         uses: actions/checkout@v2.1.0
@@ -85,6 +88,7 @@ jobs:
     name: analyze_aspnet
     needs: [build, test]
     runs-on: ubuntu-18.04
+    if: '!github.event.repository.fork'
     steps:
       - name: actions_checkout
         uses: actions/checkout@v2.1.0
@@ -120,6 +124,7 @@ jobs:
     name: pack_aspnet
     needs: [analyze]
     runs-on: ubuntu-18.04
+    if: '!github.event.repository.fork'
     steps:
       - name: actions_checkout
         uses: actions/checkout@v2.1.0
@@ -151,6 +156,7 @@ jobs:
       AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
     needs: pack
     runs-on: ubuntu-18.04
+    if: '!github.event.repository.fork'
     steps:
       - name: actions_checkout
         uses: actions/checkout@v2.1.0
