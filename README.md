@@ -18,3 +18,7 @@ RVTR Servicehub Lodging API
 The project is made available under the terms of the [MIT License][license_mit].
 
 [license_mit]: https://github.com/rvtr/rvtr-svc-lodging/blob/master/LICENSE 'mit license'
+
+## service link
+
+<https://api.rvtr.net/rest/lodging>
