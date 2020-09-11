@@ -44,5 +44,15 @@ namespace RVTR.Lodging.UnitTesting.Tests
 
       Assert.NotNull(resultMany);
     }
+
+    [Fact]
+    public async void Test_Controller_GetID()
+    {
+      var failResult = await _controller.Get(0);
+      var returnOneResult = await _controller.Get(1);
+
+      Assert.NotNull(failResult);
+      Assert.NotNull(returnOneResult);
+    }
   }
 }
