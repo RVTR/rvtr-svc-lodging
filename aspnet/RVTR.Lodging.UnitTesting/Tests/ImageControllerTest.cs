@@ -16,14 +16,14 @@ namespace RVTR.Lodging.UnitTesting.Tests
   {
     private static readonly SqliteConnection _connection = new SqliteConnection("Data Source=:memory:");
     private static readonly DbContextOptions<LodgingContext> _options = new DbContextOptionsBuilder<LodgingContext>().UseSqlite(_connection).Options;
-    private readonly LodgingController _controller;
-    private readonly ILogger<LodgingController> _logger;
+    private readonly ImageController _controller;
+    private readonly ILogger<ImageController> _logger;
     private readonly UnitOfWork _unitOfWork;
 
     public ImageControllerTest()
     {
       var contextMock = new Mock<LodgingContext>(_options);
-      var loggerMock = new Mock<ILogger<LodgingController>>();
+      var imageMock = new Mock<ILogger<ImageController>>();
       var repositoryMock = new Mock<LodgingRepo>(new LodgingContext(_options));
       var unitOfWorkMock = new Mock<UnitOfWork>(contextMock.Object);
 
@@ -32,7 +32,7 @@ namespace RVTR.Lodging.UnitTesting.Tests
       repositoryMock.Setup(m => m.SelectAsync(1)).Returns(Task.FromResult<LodgingModel>(null));
       unitOfWorkMock.Setup(m => m.Lodging).Returns(repositoryMock.Object);
 
-      _logger = loggerMock.Object;
+      _logger = imageMock.Object;
       _unitOfWork = unitOfWorkMock.Object;
       _controller = new ImageController(_logger, _unitOfWork);
     }
