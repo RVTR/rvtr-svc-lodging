@@ -3,7 +3,7 @@ bin/
 code_coverage/
 obj/
 test_coverage/
-.vs/
+.vs*/
 
 appsettings*
 !appsettings.json
