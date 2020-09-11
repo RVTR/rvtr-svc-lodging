@@ -15,6 +15,19 @@ namespace RVTR.Lodging.WebApi.Controllers
     [Route("rest/lodging/{version:apiVersion}/[controller]")]
     public class ImageController: ControllerBase
     {
+        private readonly ILogger<LodgingController> _logger;
+        private readonly UnitOfWork _unitOfWork;
+        
+        /// <summary>
+        /// Gets all the images in the blob storage
+        /// </summary>
+        /// <returns>The Image</returns>
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> Get()
+        {
+            return Ok(await _unitOfWork.Lodging.SelectAsync());
+        }
 
     }
 }
