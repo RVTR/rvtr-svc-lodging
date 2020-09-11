@@ -20,6 +20,8 @@ namespace RVTR.Lodging.ObjectModel.Models
 
     public IEnumerable<ReviewModel> Reviews { get; set; }
 
+    public IEnumerable<string> ImageURLs { get; set; }
+
     /// <summary>
     /// Represents the _Lodging_ `Validate` model
     /// </summary>

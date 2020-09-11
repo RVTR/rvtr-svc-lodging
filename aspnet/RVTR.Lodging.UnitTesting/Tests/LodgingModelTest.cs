@@ -18,7 +18,8 @@ namespace RVTR.Lodging.UnitTesting.Tests
           Name = "name",
           Bathrooms = 0,
           Rentals = new List<RentalModel>(),
-          Reviews = new List<ReviewModel>()
+          Reviews = new List<ReviewModel>(),
+          ImageURLs = new List<string>()
         }
       }
     };
