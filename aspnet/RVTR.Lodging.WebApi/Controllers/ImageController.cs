@@ -8,8 +8,11 @@ using RVTR.Lodging.DataContext.Repositories;
 using RVTR.Lodging.ObjectModel.Models;
 
 namespace RVTR.Lodging.WebApi.Controllers
-{
-    [APIController]
+{ 
+    /// <summary>
+    ///
+    /// </summary>
+    [ApiController]
     [EnableCors("public")]
     [ApiVersion("0.0")]
     [Route("rest/lodging/{version:apiVersion}/[controller]")]
@@ -23,7 +26,7 @@ namespace RVTR.Lodging.WebApi.Controllers
         /// </summary>
         /// <param name="logger">The Logger</param>
         /// <param name="unitOfWork">The UnitOfWork</param>
-        public ImageController(ILogger<LodgingController> logger, UnitOfWork unitOfWork)
+        public ImageController(ILogger<ImageController> logger, UnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
