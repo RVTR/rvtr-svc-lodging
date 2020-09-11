@@ -13,11 +13,22 @@ namespace RVTR.Lodging.WebApi.Controllers
     [EnableCors("public")]
     [ApiVersion("0.0")]
     [Route("rest/lodging/{version:apiVersion}/[controller]")]
-    public class ImageController: ControllerBase
+    public class ImageController : ControllerBase
     {
-        private readonly ILogger<LodgingController> _logger;
+        private readonly ILogger<ImageController> _logger;
         private readonly UnitOfWork _unitOfWork;
-        
+
+        /// <summary>
+        /// Constructor for the ImageController sets up logger and unitOfWork dependencies
+        /// </summary>
+        /// <param name="logger">The Logger</param>
+        /// <param name="unitOfWork">The UnitOfWork</param>
+        public ImageController(ILogger<LodgingController> logger, UnitOfWork unitOfWork)
+        {
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+        }
+
         /// <summary>
         /// Gets all the images in the blob storage
         /// </summary>
@@ -26,7 +37,7 @@ namespace RVTR.Lodging.WebApi.Controllers
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _unitOfWork.Lodging.SelectAsync());
+            return Ok();
         }
 
     }
