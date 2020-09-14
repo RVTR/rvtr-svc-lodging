@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RVTR.Lodging.ObjectModel.Models
 {
@@ -20,6 +21,7 @@ namespace RVTR.Lodging.ObjectModel.Models
 
     public IEnumerable<ReviewModel> Reviews { get; set; }
 
+    [NotMapped]
     public IEnumerable<string> ImageURLs { get; set; }
 
     /// <summary>
