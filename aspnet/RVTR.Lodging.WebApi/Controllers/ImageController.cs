@@ -40,7 +40,7 @@ namespace RVTR.Lodging.WebApi.Controllers
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
-            return Ok();
+            return Ok(await _unitOfWork.Lodging.SelectAsync());
         }
 
     }
