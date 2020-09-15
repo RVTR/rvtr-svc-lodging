@@ -11,6 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Extensions.AspNetCore.DataProtection.Blobs" Version="*" />
+    <PackageReference Include="azure.storage.blobs" Version="12.6.0" />
     <PackageReference Include="microsoft.aspnetcore.mvc.newtonsoftjson" Version="3.1.7" />
     <PackageReference Include="microsoft.aspnetcore.mvc.versioning" Version="4.1.1" />
     <PackageReference Include="microsoft.aspnetcore.mvc.versioning.apiexplorer" Version="4.1.1" />
