@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
@@ -59,6 +60,10 @@ namespace RVTR.Lodging.WebApi
           options.EnableRetryOnFailure(3);
         });
       });
+
+      services
+        .AddDataProtection()
+        .PersistKeysToAzureBlobStorage(_configuration.GetConnectionString("blob"), "images", "haroldblob");
 
       services.AddScoped<ClientZipkinMiddleware>();
       services.AddScoped<UnitOfWork>();
