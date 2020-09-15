@@ -4,7 +4,7 @@
     ".NETCoreApp,Version=v3.1": {
       "Azure.Extensions.AspNetCore.DataProtection.Blobs": {
         "type": "Direct",
-        "requested": "[*, )",
+        "requested": "[1.0.1, )",
         "resolved": "1.0.1",
         "contentHash": "Oiti1FigA7vtOaCeEVcO+UXZ/SCPl5x2enDx0HbiMDRWdvCNiDyUkU6MFGOPngt8ObiVmhFjKDlvTNEYdJB8QA==",
         "dependencies": {

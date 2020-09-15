@@ -2,6 +2,16 @@
   "version": 1,
   "dependencies": {
     ".NETCoreApp,Version=v3.1": {
+      "Azure.Extensions.AspNetCore.DataProtection.Blobs": {
+        "type": "Direct",
+        "requested": "[1.0.1, )",
+        "resolved": "1.0.1",
+        "contentHash": "Oiti1FigA7vtOaCeEVcO+UXZ/SCPl5x2enDx0HbiMDRWdvCNiDyUkU6MFGOPngt8ObiVmhFjKDlvTNEYdJB8QA==",
+        "dependencies": {
+          "Azure.Storage.Blobs": "12.0.0",
+          "Microsoft.AspNetCore.DataProtection": "2.1.0"
+        }
+      },
       "Azure.Storage.Blobs": {
         "type": "Direct",
         "requested": "[12.6.0, )",
@@ -86,15 +96,6 @@
           "System.Numerics.Vectors": "4.5.0",
           "System.Text.Json": "4.6.0",
           "System.Threading.Tasks.Extensions": "4.5.2"
-        }
-      },
-      "Azure.Extensions.AspNetCore.DataProtection.Blobs": {
-        "type": "Transitive",
-        "resolved": "1.0.1",
-        "contentHash": "Oiti1FigA7vtOaCeEVcO+UXZ/SCPl5x2enDx0HbiMDRWdvCNiDyUkU6MFGOPngt8ObiVmhFjKDlvTNEYdJB8QA==",
-        "dependencies": {
-          "Azure.Storage.Blobs": "12.0.0",
-          "Microsoft.AspNetCore.DataProtection": "2.1.0"
         }
       },
       "Azure.Storage.Common": {
@@ -2093,7 +2094,7 @@
       "rvtr.lodging.webapi": {
         "type": "Project",
         "dependencies": {
-          "Azure.Extensions.AspNetCore.DataProtection.Blobs": "0.0.0",
+          "Azure.Extensions.AspNetCore.DataProtection.Blobs": "1.0.1",
           "RVTR.Lodging.DataContext": "1.0.0",
           "RVTR.Lodging.ObjectModel": "1.0.0",
           "azure.storage.blobs": "12.6.0",
