@@ -1,3 +1,5 @@
+using Azure.Storage.Blobs;
+using Microsoft.Extensions.Azure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +13,7 @@ using RVTR.Lodging.DataContext;
 using RVTR.Lodging.DataContext.Repositories;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using zipkin4net.Middleware;
+using Azure.Core;
 
 namespace RVTR.Lodging.WebApi
 {
