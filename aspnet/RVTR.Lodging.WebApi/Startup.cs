@@ -64,10 +64,9 @@ namespace RVTR.Lodging.WebApi
         });
       });
 
-      services
-        .AddDataProtection()
-        .PersistKeysToAzureBlobStorage(_configuration.GetConnectionString("blob"), "images", "haroldblob");
-
+      services.AddAzureClients(builder => {
+        builder.AddBlobServiceClient(_configuration.GetConnectionString("blob"));
+      });
       services.AddScoped<ClientZipkinMiddleware>();
       services.AddScoped<UnitOfWork>();
       services.AddSwaggerGen();

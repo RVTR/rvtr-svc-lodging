@@ -25,19 +25,19 @@ namespace RVTR.Lodging.WebApi.Controllers
     {
         private readonly ILogger<ImageController> _logger;
         private readonly UnitOfWork _unitOfWork;
-        private readonly IConfiguration _configuration;
+        private BlobServiceClient _blob;
 
         /// <summary>
         /// Constructor for the ImageController sets up logger and unitOfWork dependencies
         /// </summary>
         /// <param name="logger">The Logger</param>
         /// <param name="unitOfWork">The UnitOfWork</param>
-        /// <param name="configuration">The Configuration</param>
-        public ImageController(ILogger<ImageController> logger, UnitOfWork unitOfWork, IConfiguration configuration)
+        /// <param name="blob">The Blob</param>
+        public ImageController(ILogger<ImageController> logger, UnitOfWork unitOfWork, IAzureClientFactory<BlobServiceClient> blob)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
-            _configuration = configuration;
+            _blob = blob.CreateClient("blob");
         }
 
         /// <summary>
@@ -48,11 +48,8 @@ namespace RVTR.Lodging.WebApi.Controllers
         [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
-            // Create a BlobServiceClient object which will be used to create a container client
-            BlobServiceClient blobServiceClient = new BlobServiceClient(_configuration.GetConnectionString("blob"));
-
             // Get the container and return a container client object
-            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient("images");
+            BlobContainerClient containerClient = _blob.GetBlobContainerClient("images");
             
             var images = new List<BlobItem>();
 
