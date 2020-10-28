@@ -4,7 +4,7 @@ kind: Deployment
 metadata:
   name: lodging
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: lodging
@@ -30,7 +30,9 @@ spec:
           ports:
             - containerPort: 80
               name: lodging-http
-
+          volumeMounts:
+            - mountPath: /storage
+              name: lodging-storage
         - env:
             - name: POSTGRES_PASSWORD
               value: LodgingData@2020
@@ -40,6 +42,8 @@ spec:
           ports:
             - containerPort: 5432
               name: postgres-tcp
-
+      volumes:
+        - name: lodging-storage
+          emptyDir: {}
       imagePullSecrets:
         - name: github
