@@ -18,7 +18,8 @@ namespace RVTR.Lodging.UnitTesting.Tests
           Price = 0.0,
           DiscountedPrice = 0.0,
           LodgingId = 0,
-          Lodging = null
+          Lodging = new LodgingModel(),
+          LotNumber = "3",
         }
       }
     };

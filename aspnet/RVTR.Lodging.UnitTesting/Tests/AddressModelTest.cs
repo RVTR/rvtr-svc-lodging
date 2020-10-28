@@ -18,7 +18,7 @@ namespace RVTR.Lodging.UnitTesting.Tests
         {
           Id = 0,
           City = "city",
-          Country = "country",
+          Country = "US", //US or USA are the only valid country names
           PostalCode = "postalcode",
           StateProvince = "stateprovince",
           Street = "street",

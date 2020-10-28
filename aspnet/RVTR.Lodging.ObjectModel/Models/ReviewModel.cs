@@ -13,11 +13,11 @@ namespace RVTR.Lodging.ObjectModel.Models
 
     public int AccountId { get; set; }
 
-    public string Comment { get; set; }
+    public string Comment { get; set; } //Comment can be empty
 
     public DateTime DateCreated { get; set; }
 
-    public int Rating { get; set; }
+    public int Rating { get; set; } = -1;
 
     public int? LodgingId { get; set; }
 
@@ -28,6 +28,20 @@ namespace RVTR.Lodging.ObjectModel.Models
     /// </summary>
     /// <param name="validationContext"></param>
     /// <returns></returns>
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => new List<ValidationResult>();
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+      if (Lodging == null)
+      {
+        yield return new ValidationResult("Lodging object cannot be null.");
+      }
+      if (DateCreated == null)
+      {
+        yield return new ValidationResult("DateCreated cannot be null.");
+      }
+      if (Rating < 1 || Rating > 10)
+      {
+        yield return new ValidationResult("Rating must be between 1 and 10.");
+      }
+    }
   }
 }

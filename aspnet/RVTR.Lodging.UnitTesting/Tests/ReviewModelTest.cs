@@ -18,9 +18,9 @@ namespace RVTR.Lodging.UnitTesting.Tests
           AccountId = 0,
           Comment = "comment",
           DateCreated = DateTime.Now,
-          Rating = 0,
+          Rating = 1, //Rating must be between 1 and 10
           LodgingId = 0,
-          Lodging = null
+          Lodging = new LodgingModel()
         }
       }
     };

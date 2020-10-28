@@ -55,6 +55,20 @@ namespace RVTR.Lodging.ObjectModel.Models
     /// </summary>
     /// <param name="validationContext"></param>
     /// <returns></returns>
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) => new List<ValidationResult>();
+    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+    {
+      if (Location == null)
+      {
+        yield return new ValidationResult("Location cannot be null.");
+      }
+      if (string.IsNullOrEmpty(Name))
+      {
+        yield return new ValidationResult("Name cannot be null.");
+      }
+      if (Bathrooms < 0)
+      {
+        yield return new ValidationResult("Number of bathrooms must be greater than 0.");
+      }
+    }
   }
 }
