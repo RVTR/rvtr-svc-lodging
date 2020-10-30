@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 
 namespace RVTR.Lodging.ObjectModel.Models
 {
@@ -37,6 +38,12 @@ namespace RVTR.Lodging.ObjectModel.Models
     /// </summary>
     /// <value></value>
     public int Bathrooms { get; set; }
+
+
+    /// <summary>
+    /// List of the image picture urls that a lodging can display 
+    /// </summary>
+    public IEnumerable<ImageModel> Images { get; set; }
 
     /// <summary>
     ///
