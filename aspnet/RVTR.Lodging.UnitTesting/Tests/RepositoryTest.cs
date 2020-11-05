@@ -5,7 +5,6 @@ using RVTR.Lodging.DataContext;
 using RVTR.Lodging.DataContext.Repositories;
 using RVTR.Lodging.ObjectModel.Models;
 using Xunit;
-using System.Collections.Generic;
 using System;
 
 namespace RVTR.Lodging.UnitTesting.Tests
