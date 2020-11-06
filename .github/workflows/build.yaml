@@ -59,7 +59,7 @@ jobs:
         uses: actions/upload-artifact@v1.0.0
         with:
           name: code_coverage
-          path: ${{ env.WORKING_DIRECTORY }}/code_coverage
+          path: ${{ env.WORKING_DIRECTORY }}/RVTR.Lodging.UnitTesting/code_coverage
       - name: trx_upload
         uses: actions/upload-artifact@v1.0.0
         with:
@@ -79,7 +79,7 @@ jobs:
         uses: actions/download-artifact@v1.0.0
         with:
           name: code_coverage
-          path: ${{ env.WORKING_DIRECTORY }}/code_coverage
+          path: ${{ env.WORKING_DIRECTORY }}/RVTR.Lodging.UnitTesting/code_coverage
       - name: trx_download
         uses: actions/download-artifact@v1.0.0
         with:
