@@ -21,7 +21,6 @@ namespace RVTR.Lodging.Context
     /// <value></value>
     public DbSet<RentalModel> Rentals { get; set; }
 
-
     /// <summary>
     ///
     /// </summary>

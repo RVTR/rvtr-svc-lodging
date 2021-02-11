@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using RVTR.Lodging.Domain.Attributes;
 
-
 namespace RVTR.Lodging.Domain.Models
 {
   /// <summary>
