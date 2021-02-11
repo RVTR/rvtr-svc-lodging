@@ -51,6 +51,8 @@ namespace RVTR.Lodging.Domain.Models
     /// <value></value>
     public int? LodgingModelId { get; set; }
 
+
+
     /// <summary>
     /// The capacity of the campsite
     /// </summary>
