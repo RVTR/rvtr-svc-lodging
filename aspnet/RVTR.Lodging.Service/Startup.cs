@@ -67,7 +67,7 @@ namespace RVTR.Lodging.Service
       }, ServiceLifetime.Transient);
 
       services.AddScoped<ClientZipkinMiddleware>();
-      services.AddTransient<IUnitOfWork, UnitOfWork>();
+      services.AddScoped<UnitOfWork>();
       services.AddSwaggerGen();
       services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ClientSwaggerOptions>();
       services.AddVersionedApiExplorer(options =>

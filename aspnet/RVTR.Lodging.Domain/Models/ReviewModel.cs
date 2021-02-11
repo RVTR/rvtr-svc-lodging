@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using RVTR.Lodging.Domain.Attributes;
 
 namespace RVTR.Lodging.Domain.Models
 {
@@ -13,8 +14,9 @@ namespace RVTR.Lodging.Domain.Models
 
     public int AccountId { get; set; }
 
-    [Required(ErrorMessage = "Must have a comment.")]
-    [MaxLength(1000, ErrorMessage = "Comment must be fewer than 1000 characters long")]
+    // [Required(ErrorMessage = "Must have a comment.")]
+    // [MaxLength(1000, ErrorMessage = "Comment must be fewer than 1000 characters long")]
+    [CommentAttribute]
     public string Comment { get; set; }
 
     [Required(ErrorMessage = "Timestamp can't be null.")]
