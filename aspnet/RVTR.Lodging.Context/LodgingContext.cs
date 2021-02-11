@@ -55,10 +55,10 @@ namespace RVTR.Lodging.Context
 
       modelBuilder.Entity<LodgingModel>().HasData(new List<LodgingModel>()
       {
-        new LodgingModel() { Id = 1, LocationId = 1, Name = "Dragon Fly", Bathrooms = 2 },
-        new LodgingModel() { Id = 2, LocationId = 2, Name = "Galleywinter", Bathrooms = 3 },
-        new LodgingModel() { Id = 3, LocationId = 3, Name = "Red Creek", Bathrooms = 5 },
-        new LodgingModel() { Id = 4, LocationId = 4, Name = "Lotus Belle", Bathrooms = 6 },
+        new LodgingModel() { Id = 1, AddressId = 1, Name = "Dragon Fly", Bathrooms = 2 },
+        new LodgingModel() { Id = 2, AddressId = 2, Name = "Galleywinter", Bathrooms = 3 },
+        new LodgingModel() { Id = 3, AddressId = 3, Name = "Red Creek", Bathrooms = 5 },
+        new LodgingModel() { Id = 4, AddressId = 4, Name = "Lotus Belle", Bathrooms = 6 },
       });
 
       modelBuilder.Entity<RentalModel>().HasData(new List<RentalModel>()
