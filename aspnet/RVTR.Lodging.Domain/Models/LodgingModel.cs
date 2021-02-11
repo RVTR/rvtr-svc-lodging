@@ -43,6 +43,7 @@ namespace RVTR.Lodging.Domain.Models
     [FacilitiesAttribute]
     public int Bathrooms { get; set; }
 
+
     /// <summary>
     /// Rental list of the lodging
     /// </summary>
