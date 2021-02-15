@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using RVTR.Lodging.Domain.Attributes;
+
 
 namespace RVTR.Lodging.Domain.Models
 {
@@ -19,17 +21,14 @@ namespace RVTR.Lodging.Domain.Models
     /// The lot number of the rental model
     /// </summary>
     /// <value></value>
-    [Required(ErrorMessage = "Lot number can't be null.")]
-    [MaxLength(10, ErrorMessage = "Lot number must be 10 digits maximum")]
-    [RegularExpression(@"^\d+([a-zA-Z]+)?$", ErrorMessage = "Lot number must be either a number or a number plus a series of letters.")]
+    [LotNumberAttribute]
     public string LotNumber { get; set; }
 
     /// <summary>
     /// The status of the rental model
     /// </summary>
     /// <value></value>
-    [Required(ErrorMessage = "Status can't be null.")]
-    [RegularExpression(@"^([Bb]ooked|[Aa]vailable)$", ErrorMessage = "Status must be either 'Booked' or 'Available'")]
+    [StatusAttribute]
     public string Status { get; set; }
 
     /// <summary>
@@ -63,16 +62,14 @@ namespace RVTR.Lodging.Domain.Models
     /// The name of the campsite
     /// </summary>
     /// <value></value>
-    [Required(ErrorMessage = "Name must exist.")]
-    [MaxLength(100, ErrorMessage = "Name must be fewer than 100 characters")]
+    [SiteNameAttribute]
     public string SiteName { get; set; }
 
     /// <summary>
     /// the size of the campsite (e.g. 5 x 5, 5x5, 5ft x 5ft, 5 yards x 5 yards etc.)
     /// </summary>
     /// <value></value>
-    [Required(ErrorMessage = "Size must exist")]
-    [RegularExpression(@"^\d+ ?([Ff]t|[Yy]ards|[Mm]eters|[Mm]) ?x ?\d+ ?([Ff]t|[Yy]ards|[Mm]eters|[Mm])$", ErrorMessage = "Size must be in the form '10 [unit?] x 10 [unit?]'")]
+    [SizeAttribute]
     public string Size { get; set; }
 
     /// <summary>
