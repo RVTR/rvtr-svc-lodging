@@ -21,11 +21,6 @@ namespace RVTR.Lodging.Context
     /// <value></value>
     public DbSet<RentalModel> Rentals { get; set; }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <value></value>
-    public DbSet<RentalUnitModel> RentalUnits { get; set; }
 
     /// <summary>
     ///
@@ -69,18 +64,18 @@ namespace RVTR.Lodging.Context
 
       modelBuilder.Entity<RentalModel>().HasData(new List<RentalModel>()
       {
-        new RentalModel() { Id = 1, LodgingModelId = 1, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70 },
-        new RentalModel() { Id = 2, LodgingModelId = 1, LotNumber = "101", Status = "Available", Price = 300, DiscountedPrice = 280 },
-        new RentalModel() { Id = 3, LodgingModelId = 1, LotNumber = "102", Status = "Booked", Price = 300, DiscountedPrice = 280 },
-        new RentalModel() { Id = 4, LodgingModelId = 1, LotNumber = "103", Status = "Booked", Price = 100, DiscountedPrice = 70 },
-        new RentalModel() { Id = 5, LodgingModelId = 2, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70 },
-        new RentalModel() { Id = 6, LodgingModelId = 2, LotNumber = "101", Status = "Available", Price = 300, DiscountedPrice = 280 },
-        new RentalModel() { Id = 7, LodgingModelId = 2, LotNumber = "102", Status = "Booked", Price = 300, DiscountedPrice = 280 },
-        new RentalModel() { Id = 8, LodgingModelId = 2, LotNumber = "103", Status = "Booked", Price = 100, DiscountedPrice = 70 },
-        new RentalModel() { Id = 9, LodgingModelId = 3, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70 },
-        new RentalModel() { Id = 10, LodgingModelId = 3, LotNumber = "101", Status = "Booked", Price = 100, DiscountedPrice = 70 },
-        new RentalModel() { Id = 11, LodgingModelId = 4, LotNumber = "100", Status = "Available", Price = 300, DiscountedPrice = 280 },
-        new RentalModel() { Id = 12, LodgingModelId = 4, LotNumber = "101", Status = "Booked", Price = 300, DiscountedPrice = 280 },
+        new RentalModel() { Id = 1, LodgingModelId = 1, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, Capacity = 4, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { Id = 2, LodgingModelId = 1, LotNumber = "101", Status = "Available", Price = 300, DiscountedPrice = 280, Capacity = 5, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { Id = 3, LodgingModelId = 1, LotNumber = "102", Status = "Booked", Price = 300, DiscountedPrice = 280, Capacity = 5, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { Id = 4, LodgingModelId = 1, LotNumber = "103", Status = "Booked", Price = 100, DiscountedPrice = 70, Capacity = 4, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { Id = 5, LodgingModelId = 2, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, Capacity = 4, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { Id = 6, LodgingModelId = 2, LotNumber = "101", Status = "Available", Price = 300, DiscountedPrice = 280, Capacity = 5, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { Id = 7, LodgingModelId = 2, LotNumber = "102", Status = "Booked", Price = 300, DiscountedPrice = 280, Capacity = 5, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { Id = 8, LodgingModelId = 2, LotNumber = "103", Status = "Booked", Price = 100, DiscountedPrice = 70, Capacity = 4, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { Id = 9, LodgingModelId = 3, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, Capacity = 4, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { Id = 10, LodgingModelId = 3, LotNumber = "101", Status = "Booked", Price = 100, DiscountedPrice = 70, Capacity = 5, SiteName = "Tent", Size = "5x5"  },
+        new RentalModel() { Id = 11, LodgingModelId = 4, LotNumber = "100", Status = "Available", Price = 300, DiscountedPrice = 280, Capacity = 4, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { Id = 12, LodgingModelId = 4, LotNumber = "101", Status = "Booked", Price = 300, DiscountedPrice = 280, Capacity = 5, SiteName = "RV", Size = "10x10" },
       });
 
       modelBuilder.Entity<ImageModel>().HasData(new List<ImageModel>()
@@ -116,22 +111,6 @@ namespace RVTR.Lodging.Context
         new ImageModel() {Id = 26, LodgingModelId = 4, ImageUri = "https://www.turbopass.com/3843-carousel/desert-sunset-experience.jpg"},
         new ImageModel() {Id = 27, LodgingModelId = 4, ImageUri = "https://www.kcet.org/sites/kl/files/atoms/article_atoms/www.kcet.org/living/travel/socal_wanderer/jumbo-rocks-campground-joshua-tree.jpeg"},
         new ImageModel() {Id = 28, LodgingModelId = 4, ImageUri = "https://upload.wikimedia.org/wikipedia/commons/6/67/Desert_Fox_Pups.jpg"},
-      });
-
-      modelBuilder.Entity<RentalUnitModel>().HasData(new List<RentalUnitModel>()
-      {
-        new RentalUnitModel() { Id = 1, RentalId = 1, Capacity = 4, Name = "Tent", Size = "5x5" },
-        new RentalUnitModel() { Id = 2, RentalId = 2, Capacity = 5, Name = "RV", Size = "10x10" },
-        new RentalUnitModel() { Id = 3, RentalId = 3, Capacity = 5, Name = "RV", Size = "10x10" },
-        new RentalUnitModel() { Id = 4, RentalId = 4, Capacity = 4, Name = "Tent", Size = "5x5" },
-        new RentalUnitModel() { Id = 5, RentalId = 5, Capacity = 4, Name = "Tent", Size = "5x5" },
-        new RentalUnitModel() { Id = 6, RentalId = 6, Capacity = 5, Name = "RV", Size = "10x10" },
-        new RentalUnitModel() { Id = 7, RentalId = 7, Capacity = 5, Name = "RV", Size = "10x10" },
-        new RentalUnitModel() { Id = 8, RentalId = 8, Capacity = 4, Name = "Tent", Size = "5x5" },
-        new RentalUnitModel() { Id = 9, RentalId = 9, Capacity = 4, Name = "Tent", Size = "5x5" },
-        new RentalUnitModel() { Id = 10, RentalId = 10, Capacity = 5, Name = "Tent", Size = "5x5" },
-        new RentalUnitModel() { Id = 11, RentalId = 11, Capacity = 4, Name = "RV", Size = "10x10" },
-        new RentalUnitModel() { Id = 12, RentalId = 12, Capacity = 5, Name = "RV", Size = "10x10" },
       });
 
       modelBuilder.Entity<LocationModel>().HasData(new List<LocationModel>()

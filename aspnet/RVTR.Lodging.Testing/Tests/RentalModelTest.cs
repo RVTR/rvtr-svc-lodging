@@ -19,6 +19,9 @@ namespace RVTR.Lodging.Testing.Tests
           DiscountedPrice = 0.0,
           LodgingModelId = 0,
           LotNumber = "1",
+          Capacity = 5,
+          SiteName = "Test_Campsite_Good",
+          Size = "5ft x 5ft",
         }
       }
     };

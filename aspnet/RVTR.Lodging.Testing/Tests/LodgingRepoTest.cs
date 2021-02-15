@@ -30,11 +30,11 @@ namespace RVTR.Lodging.Testing.Tests
           {
             new RentalModel()
             {
-              Id = 100, LotNumber = "1", Status = "Available", Unit = new RentalUnitModel { Name = "Unit1", Size = "5x5", Id = 100, Capacity = 4 }
+              Id = 100, LotNumber = "1", Status = "Available", SiteName = "Unit1", Size = "5x5", Capacity = 4
             },
             new RentalModel()
             {
-              Id = 101, LotNumber = "2", Status = "Booked", Unit = new RentalUnitModel { Name = "Unit2", Size = "5x5", Id = 101, Capacity = 4 }
+              Id = 101, LotNumber = "2", Status = "Booked", SiteName = "Unit2", Size = "5x5", Capacity = 4
             }
           }
         }
