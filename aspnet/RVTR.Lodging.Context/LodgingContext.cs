@@ -117,10 +117,10 @@ namespace RVTR.Lodging.Context
 
       modelBuilder.Entity<AddressModel>().HasData(new List<AddressModel>()
       {
-        new AddressModel() { Id = 1, City = "Palm Bay", Country = "USA", PostalCode = "32908", StateProvince = "FL", Street = "750 Osmosis Dr SW" },
-        new AddressModel() { Id = 2, City = "Afton", Country = "USA", PostalCode = "22920", StateProvince = "VA", Street = "8801 Dick Woods Rd" },
-        new AddressModel() { Id = 3, City = "Hanna", Country = "USA", PostalCode = "84031", StateProvince = "UT", Street = "5761 Upper, Red Creek Rd" },
-        new AddressModel() { Id = 4, City = "Topanga", Country = "USA", PostalCode = "90290", StateProvince = "CA", Street = "101 S Topanga Canyon Blvd" },
+        new AddressModel() { Id = 1, City = "Palm Bay", Country = "USA", Latitude = "00.000", Longitude = "00.000", PostalCode = "32908", StateProvince = "FL", Street = "750 Osmosis Dr SW" },
+        new AddressModel() { Id = 2, City = "Afton", Country = "USA", Latitude = "00.000", Longitude = "00.000", PostalCode = "22920", StateProvince = "VA", Street = "8801 Dick Woods Rd" },
+        new AddressModel() { Id = 3, City = "Hanna", Country = "USA", Latitude = "00.000", Longitude = "00.000", PostalCode = "84031", StateProvince = "UT", Street = "5761 Upper, Red Creek Rd" },
+        new AddressModel() { Id = 4, City = "Topanga", Country = "USA", Latitude = "00.000", Longitude = "00.000", PostalCode = "90290", StateProvince = "CA", Street = "101 S Topanga Canyon Blvd" },
       });
     }
   }
