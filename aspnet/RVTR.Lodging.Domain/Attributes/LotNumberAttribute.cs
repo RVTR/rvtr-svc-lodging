@@ -11,18 +11,17 @@ namespace RVTR.Lodging.Domain.Attributes
   {
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
-        var rentalModel = (RentalModel)validationContext.ObjectInstance;
-
-        if (rentalModel.LotNumber == null)
+        Regex rgx = new Regex(@"^\d+([a-zA-Z]+)?$");
+        if (value == null)
         {
             return new ValidationResult("Lot number can't be null.");
         }
-        if (rentalModel.LotNumber.Length >10)
+        string LotNumber = value.ToString();
+        if (LotNumber.Length >10)
         {
             return new ValidationResult("Lot number must be 10 digits maximum.");
         }
-        Regex rgx = new Regex(@"^\d+([a-zA-Z]+)?$");
-        if (!rgx.IsMatch(rentalModel.LotNumber))
+        if (!rgx.IsMatch(LotNumber))
         {
           return new ValidationResult("Lot number must be either a number or a number plus a series of letters.");
         }

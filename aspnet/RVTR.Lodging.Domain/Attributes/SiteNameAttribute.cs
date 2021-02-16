@@ -11,13 +11,12 @@ namespace RVTR.Lodging.Domain.Attributes
   {
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
-        var rentalModel = (RentalModel)validationContext.ObjectInstance;
 
-        if (rentalModel.SiteName == null)
+        if (value == null)
         {
             return new ValidationResult("SiteName can't be null.");
         }
-        if (rentalModel.SiteName.Length >100)
+        if (value.ToString().Length >100)
         {
             return new ValidationResult("SiteName must be 100 characters maximum.");
         }
