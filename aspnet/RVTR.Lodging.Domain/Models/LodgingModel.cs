@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using RVTR.Lodging.Domain.Attributes;
 
 namespace RVTR.Lodging.Domain.Models
 {
@@ -8,6 +9,7 @@ namespace RVTR.Lodging.Domain.Models
   /// </summary>
   public class LodgingModel : IValidatableObject
   {
+
     /// <summary>
     /// id of the lodging model in the db
     /// </summary>
@@ -38,8 +40,7 @@ namespace RVTR.Lodging.Domain.Models
     /// Number of bathrooms at the lodging
     /// </summary>
     /// <value></value>
-    [Required(ErrorMessage = "Number of bathrooms is required")]
-    [Range(1, 100, ErrorMessage = "Must have between 1 and 100 bathrooms")]
+    [FacilitiesAttribute]
     public int Bathrooms { get; set; }
 
     /// <summary>
