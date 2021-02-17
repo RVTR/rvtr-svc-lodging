@@ -19,6 +19,8 @@ namespace RVTR.Lodging.Testing.Tests
           Id = 0,
           City = "City",
           Country = "USA",
+          Longitude = "00.000",
+          Latitude = "00.000",
           PostalCode = "11111",
           StateProvince = "TX",
           Street = "street",

@@ -19,8 +19,7 @@ namespace RVTR.Lodging.Context.Repositories
     /// </summary>
     public override async Task<IEnumerable<LodgingModel>> SelectAsync() => await Db
       .Include(r => r.Rentals)
-      .Include(l => l.Location)
-        .ThenInclude(a => a.Address)
+      .Include(a => a.Address)
       .Include(r => r.Reviews)
       .Include(i => i.Images)
       .ToListAsync();
@@ -32,8 +31,7 @@ namespace RVTR.Lodging.Context.Repositories
     {
       var lodging = await Db
       .Include(r => r.Rentals)
-      .Include(l => l.Location)
-        .ThenInclude(a => a.Address)
+      .Include(a => a.Address)
       .Include(r => r.Reviews)
       .Include(i => i.Images)
       .FirstOrDefaultAsync(x => x.Id == id);
@@ -57,16 +55,14 @@ namespace RVTR.Lodging.Context.Repositories
       var numParams = location.Length;
 
       Expression<Func<LodgingModel, bool>> matchesAll = c =>
-        (numParams < 1 || string.IsNullOrEmpty(location[0]) || c.Location.Address.City.ToLower() == location[0].ToLower()) &&
-        (numParams < 2 || string.IsNullOrEmpty(location[1]) || c.Location.Address.StateProvince.ToLower() == location[1].ToLower()) &&
-        (numParams < 3 || string.IsNullOrEmpty(location[2]) || c.Location.Address.Country.ToLower() == location[2].ToLower());
+        (numParams < 1 || string.IsNullOrEmpty(location[0]) || c.Address.City.ToLower() == location[0].ToLower()) &&
+        (numParams < 2 || string.IsNullOrEmpty(location[1]) || c.Address.StateProvince.ToLower() == location[1].ToLower()) &&
+        (numParams < 3 || string.IsNullOrEmpty(location[2]) || c.Address.Country.ToLower() == location[2].ToLower());
 
       var lodgingsByLocation = await Db
         .Include(i => i.Images)
         .Include(r => r.Rentals)
-        .Include(l => l.Location)
-          .ThenInclude(la => la.Address)
-        // .Include(a => a.Location.Address)
+        .Include(a => a.Address)
         .Where(matchesAll)
         .Where(x => x.Rentals.Any(y => y.Status == "Available" && y.Capacity >= occupancy))
         .ToListAsync();

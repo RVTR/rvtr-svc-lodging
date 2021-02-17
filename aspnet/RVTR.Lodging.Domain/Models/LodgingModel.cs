@@ -26,7 +26,7 @@ namespace RVTR.Lodging.Domain.Models
     /// Location property of the lodging model (required)
     /// </summary>
     /// <value></value>
-    public LocationModel Location { get; set; }
+    public AddressModel Address { get; set; }
 
     /// <summary>
     /// Name of the lodging (required)
