@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using RVTR.Lodging.Domain.Attributes;
 
 namespace RVTR.Lodging.Domain.Models
 {
@@ -22,6 +23,9 @@ namespace RVTR.Lodging.Domain.Models
 
     [Range(1, 10, ErrorMessage = "Rating must be between 1 and 10")]
     public int Rating { get; set; }
+
+    [CheckInAttribute]
+    public bool IsCheckIn { get; set; }
 
     public int? LodgingModelId { get; set; }
 
