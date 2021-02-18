@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using RVTR.Lodging.Context;
 using RVTR.Lodging.Context.Repositories;
 using RVTR.Lodging.Domain.Models;
@@ -57,6 +58,22 @@ namespace RVTR.Lodging.Testing.Tests
         Assert.Equal(lodging.Address.Latitude, resultEqual.Address.Latitude);
         Assert.Equal(lodging.Address.Longitude, resultEqual.Address.Longitude);
         Assert.Equal(lodging.Name, resultEqual.Name);
+
+        await Assert.ThrowsAsync<KeyNotFoundException>(async () => await lodgings.SelectAsync(-1));
+      }
+    }
+
+    [Theory]
+    [MemberData(nameof(Records))]
+    public async void Test_LodgingRepo_SelectAllAsync(LodgingModel lodging)
+    {
+      using (var ctx = new LodgingContext(Options))
+      {
+        var lodgings = new LodgingRepo(ctx);
+
+        var result = await lodgings.SelectAsync();
+
+        Assert.IsType<List<LodgingModel>>(result);
 
         await Assert.ThrowsAsync<KeyNotFoundException>(async () => await lodgings.SelectAsync(-1));
       }
