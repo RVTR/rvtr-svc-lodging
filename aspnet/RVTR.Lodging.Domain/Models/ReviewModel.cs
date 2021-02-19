@@ -25,7 +25,7 @@ namespace RVTR.Lodging.Domain.Models
     public int Rating { get; set; }
 
     [CheckInAttribute]
-    public bool IsCheckIn { get; set; }
+    public DateTime CheckIn { get; set; }
 
     public int? LodgingModelId { get; set; }
 
