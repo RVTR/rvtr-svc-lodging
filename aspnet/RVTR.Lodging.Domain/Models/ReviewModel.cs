@@ -14,7 +14,8 @@ namespace RVTR.Lodging.Domain.Models
 
     public int AccountId { get; set; }
 
-    [LengthAttribute(1, 1000, "Must have a comment.")]
+    [Required(ErrorMessage = "Must have a comment.")]
+    [MaxLength(1000, ErrorMessage = "Comment must be fewer than 1000 characters long")]
     public string Comment { get; set; }
 
     [Required(ErrorMessage = "Timestamp can't be null.")]
@@ -28,7 +29,8 @@ namespace RVTR.Lodging.Domain.Models
     /// <summary>
     /// The name of the profile reviewing the lodging
     /// </summary>
-    [LengthAttribute(1, 1000, "Must have a name.")]
+    [Required(ErrorMessage = "Must have a comment.")]
+    [MaxLength(1000, ErrorMessage = "Comment must be fewer than 1000 characters long")]
     public string Name { get; set; }
 
     /// <summary>
