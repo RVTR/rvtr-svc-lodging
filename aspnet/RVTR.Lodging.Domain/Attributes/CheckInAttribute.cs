@@ -18,16 +18,17 @@ namespace RVTR.Lodging.Domain.Attributes
     {
       if(value != null)
       {
-        var now = DateTime.Now;
-        var checkInDate = (DateTime) value;
+        return new ValidationResult("Check In date required.");
+      }
+      var now = DateTime.Now;
+      var checkInDate = (DateTime) value;
 
-        if(DateTime.Compare(now, checkInDate) >= 0)
-        {
-          return ValidationResult.Success;
-        }
+      if(DateTime.Compare(now, checkInDate) >= 0)
+      {
+        return ValidationResult.Success;
       }
 
-      return new ValidationResult("CheckIn required to be true.");
+      return new ValidationResult("Check In date has not occurred.");
     }
   }
 }
