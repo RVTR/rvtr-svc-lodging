@@ -19,6 +19,7 @@ namespace RVTR.Lodging.Testing.Tests
           Comment = "Comment",
           DateCreated = DateTime.Now,
           Rating = 1,
+          CheckIn = DateTime.Now,
           LodgingModelId = 0,
           Name = "Bob"
         }
