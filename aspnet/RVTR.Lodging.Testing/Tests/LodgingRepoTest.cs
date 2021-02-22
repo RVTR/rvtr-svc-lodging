@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using RVTR.Lodging.Context;
 using RVTR.Lodging.Context.Repositories;
 using RVTR.Lodging.Domain.Models;
@@ -17,14 +18,9 @@ namespace RVTR.Lodging.Testing.Tests
         {
           Id = 5,
           Name = "Lodging",
-          Location = new LocationModel
+          Address = new AddressModel
           {
-            Id = 100, Address = new AddressModel
-            {
-              Id = 100, City = "Austin", StateProvince = "TX", Country = "USA", PostalCode = "11111", Street = "Street"
-            },
-            Longitude = "1.00N",
-            Latitude = "1.00W"
+            Id = 100, City = "Austin", StateProvince = "TX", Country = "USA", Longitude = "1.00N", Latitude = "1.00W", PostalCode = "11111", Street = "Street"
           },
           Rentals = new List<RentalModel>
           {
@@ -59,9 +55,25 @@ namespace RVTR.Lodging.Testing.Tests
 
         Assert.Equal(lodging.Id, resultEqual.Id);
         Assert.Equal(lodging.Bathrooms, resultEqual.Bathrooms);
-        Assert.Equal(lodging.Location.Latitude, resultEqual.Location.Latitude);
-        Assert.Equal(lodging.Location.Longitude, resultEqual.Location.Longitude);
+        Assert.Equal(lodging.Address.Latitude, resultEqual.Address.Latitude);
+        Assert.Equal(lodging.Address.Longitude, resultEqual.Address.Longitude);
         Assert.Equal(lodging.Name, resultEqual.Name);
+
+        await Assert.ThrowsAsync<KeyNotFoundException>(async () => await lodgings.SelectAsync(-1));
+      }
+    }
+
+    [Theory]
+    [MemberData(nameof(Records))]
+    public async void Test_LodgingRepo_SelectAllAsync(LodgingModel lodging)
+    {
+      using (var ctx = new LodgingContext(Options))
+      {
+        var lodgings = new LodgingRepo(ctx);
+
+        var result = await lodgings.SelectAsync();
+
+        Assert.IsType<List<LodgingModel>>(result);
 
         await Assert.ThrowsAsync<KeyNotFoundException>(async () => await lodgings.SelectAsync(-1));
       }

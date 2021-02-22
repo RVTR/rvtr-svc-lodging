@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using RVTR.Lodging.Domain.Attributes;
 
-
 namespace RVTR.Lodging.Domain.Models
 {
   /// <summary>
@@ -50,6 +49,8 @@ namespace RVTR.Lodging.Domain.Models
     /// </summary>
     /// <value></value>
     public int? LodgingModelId { get; set; }
+
+
 
     /// <summary>
     /// The capacity of the campsite

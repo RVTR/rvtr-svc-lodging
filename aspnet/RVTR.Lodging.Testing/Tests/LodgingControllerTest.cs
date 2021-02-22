@@ -24,7 +24,7 @@ namespace RVTR.Lodging.Testing.Tests
       repositoryMock.Setup(m => m.SelectAsync(-1)).Throws(new KeyNotFoundException());
       repositoryMock.Setup(m => m.SelectAsync(0)).ReturnsAsync(new LodgingModel());
       repositoryMock.Setup(m => m.SelectAsync(1)).ReturnsAsync((LodgingModel)null);
-      repositoryMock.Setup(m => m.SelectAsync(2)).ReturnsAsync(new LodgingModel() { Id = 2, LocationId = 2, Name = "name", Bathrooms = 1 });
+      repositoryMock.Setup(m => m.SelectAsync(2)).ReturnsAsync(new LodgingModel() { Id = 2, AddressId = 2, Name = "name", Bathrooms = 1 });
       unitOfWorkMock.Setup(m => m.Lodging).Returns(repositoryMock.Object);
 
       _logger = loggerMock.Object;

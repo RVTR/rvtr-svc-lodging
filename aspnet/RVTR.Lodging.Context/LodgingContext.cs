@@ -21,7 +21,6 @@ namespace RVTR.Lodging.Context
     /// <value></value>
     public DbSet<RentalModel> Rentals { get; set; }
 
-
     /// <summary>
     ///
     /// </summary>
@@ -48,7 +47,6 @@ namespace RVTR.Lodging.Context
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       modelBuilder.Entity<AddressModel>().HasKey(e => e.Id);
-      modelBuilder.Entity<LocationModel>().HasKey(e => e.Id);
       modelBuilder.Entity<LodgingModel>().HasKey(e => e.Id);
       modelBuilder.Entity<RentalModel>().HasKey(e => e.Id);
       modelBuilder.Entity<ReviewModel>().HasKey(e => e.Id);
@@ -56,10 +54,10 @@ namespace RVTR.Lodging.Context
 
       modelBuilder.Entity<LodgingModel>().HasData(new List<LodgingModel>()
       {
-        new LodgingModel() { Id = 1, LocationId = 1, Name = "Dragon Fly", Bathrooms = 2 },
-        new LodgingModel() { Id = 2, LocationId = 2, Name = "Galleywinter", Bathrooms = 3 },
-        new LodgingModel() { Id = 3, LocationId = 3, Name = "Red Creek", Bathrooms = 5 },
-        new LodgingModel() { Id = 4, LocationId = 4, Name = "Lotus Belle", Bathrooms = 6 },
+        new LodgingModel() { Id = 1, AddressId = 1, Name = "Dragon Fly", Bathrooms = 2 },
+        new LodgingModel() { Id = 2, AddressId = 2, Name = "Galleywinter", Bathrooms = 3 },
+        new LodgingModel() { Id = 3, AddressId = 3, Name = "Red Creek", Bathrooms = 5 },
+        new LodgingModel() { Id = 4, AddressId = 4, Name = "Lotus Belle", Bathrooms = 6 },
       });
 
       modelBuilder.Entity<RentalModel>().HasData(new List<RentalModel>()
@@ -113,20 +111,12 @@ namespace RVTR.Lodging.Context
         new ImageModel() {Id = 28, LodgingModelId = 4, ImageUri = "https://upload.wikimedia.org/wikipedia/commons/6/67/Desert_Fox_Pups.jpg"},
       });
 
-      modelBuilder.Entity<LocationModel>().HasData(new List<LocationModel>()
-      {
-        new LocationModel() { Id = 1, AddressId = 1, Latitude = "38.0755", Longitude = "77.9889" },
-        new LocationModel() { Id = 2, AddressId = 2, Latitude = "38.0755", Longitude = "77.9889" },
-        new LocationModel() { Id = 3, AddressId = 3, Latitude = "38.0755", Longitude = "77.9889" },
-        new LocationModel() { Id = 4, AddressId = 4, Latitude = "38.0755", Longitude = "77.9889" },
-      });
-
       modelBuilder.Entity<AddressModel>().HasData(new List<AddressModel>()
       {
-        new AddressModel() { Id = 1, City = "Palm Bay", Country = "USA", PostalCode = "32908", StateProvince = "FL", Street = "750 Osmosis Dr SW" },
-        new AddressModel() { Id = 2, City = "Afton", Country = "USA", PostalCode = "22920", StateProvince = "VA", Street = "8801 Dick Woods Rd" },
-        new AddressModel() { Id = 3, City = "Hanna", Country = "USA", PostalCode = "84031", StateProvince = "UT", Street = "5761 Upper, Red Creek Rd" },
-        new AddressModel() { Id = 4, City = "Topanga", Country = "USA", PostalCode = "90290", StateProvince = "CA", Street = "101 S Topanga Canyon Blvd" },
+        new AddressModel() { Id = 1, City = "Palm Bay", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "32908", StateProvince = "FL", Street = "750 Osmosis Dr SW" },
+        new AddressModel() { Id = 2, City = "Afton", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "22920", StateProvince = "VA", Street = "8801 Dick Woods Rd" },
+        new AddressModel() { Id = 3, City = "Hanna", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "84031", StateProvince = "UT", Street = "5761 Upper, Red Creek Rd" },
+        new AddressModel() { Id = 4, City = "Topanga", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "90290", StateProvince = "CA", Street = "101 S Topanga Canyon Blvd" },
       });
     }
   }
