@@ -15,10 +15,10 @@ namespace RVTR.Lodging.Testing.Tests
     {
       new object[]
       {
-        new LodgingModel { Id = 1, AddressId = 1, Bathrooms = 1, Name = "Test" },
-        new RentalModel { Id = 1, LotNumber = "1", Price = 1.11, Status = "Available" },
-        new ReviewModel { Id = 1, Comment = "Comment", DateCreated = DateTime.Now, Rating = 1, Name = "Bob" },
-        new ImageModel { Id = 1, ImageUri = "" }
+        new LodgingModel { EntityId = 1, AddressId = 1, Bathrooms = 1, Name = "Test" },
+        new RentalModel { EntityId = 1, LotNumber = "1", Price = 1.11, Status = "Available" },
+        new ReviewModel { EntityId = 1, Comment = "Comment", DateCreated = DateTime.Now, Rating = 1, Name = "Bob" },
+        new ImageModel { EntityId = 1, ImageUri = "" }
       }
     };
 
@@ -31,6 +31,7 @@ namespace RVTR.Lodging.Testing.Tests
         ctx.Rentals.RemoveRange(ctx.Rentals);
         ctx.Lodgings.RemoveRange(ctx.Lodgings);
         ctx.Images.RemoveRange(ctx.Images);
+
         await ctx.Rentals.AddAsync(rental);
         await ctx.Reviews.AddAsync(review);
         await ctx.Images.AddAsync(image);
@@ -42,35 +43,35 @@ namespace RVTR.Lodging.Testing.Tests
       {
         var lodgings = new Repository<LodgingModel>(ctx);
 
-        await lodgings.DeleteAsync(lodging.Id);
+        await lodgings.DeleteAsync(lodging.EntityId);
 
-        Assert.Equal(EntityState.Deleted, ctx.Entry(ctx.Lodgings.Find(lodging.Id)).State);
+        Assert.Equal(EntityState.Deleted, ctx.Entry(ctx.Lodgings.Find(lodging.EntityId)).State);
       }
 
       using (var ctx = new LodgingContext(Options))
       {
         var rentals = new Repository<RentalModel>(ctx);
 
-        await rentals.DeleteAsync(rental.Id);
+        await rentals.DeleteAsync(rental.EntityId);
 
-        Assert.Equal(EntityState.Deleted, ctx.Entry(ctx.Rentals.Find(rental.Id)).State);
+        Assert.Equal(EntityState.Deleted, ctx.Entry(ctx.Rentals.Find(rental.EntityId)).State);
       }
 
       using (var ctx = new LodgingContext(Options))
       {
         var reviews = new Repository<ReviewModel>(ctx);
 
-        await reviews.DeleteAsync(review.Id);
+        await reviews.DeleteAsync(review.EntityId);
 
-        Assert.Equal(EntityState.Deleted, ctx.Entry(ctx.Reviews.Find(review.Id)).State);
+        Assert.Equal(EntityState.Deleted, ctx.Entry(ctx.Reviews.Find(review.EntityId)).State);
       }
       using (var ctx = new LodgingContext(Options))
       {
         var images = new Repository<ImageModel>(ctx);
 
-        await images.DeleteAsync(image.Id);
+        await images.DeleteAsync(image.EntityId);
 
-        Assert.Equal(EntityState.Deleted, ctx.Entry(ctx.Images.Find(image.Id)).State);
+        Assert.Equal(EntityState.Deleted, ctx.Entry(ctx.Images.Find(image.EntityId)).State);
       }
     }
 
@@ -83,6 +84,7 @@ namespace RVTR.Lodging.Testing.Tests
         ctx.Rentals.RemoveRange(ctx.Rentals);
         ctx.Lodgings.RemoveRange(ctx.Lodgings);
         ctx.Images.RemoveRange(ctx.Images);
+
         await ctx.SaveChangesAsync();
       }
 
@@ -130,13 +132,13 @@ namespace RVTR.Lodging.Testing.Tests
         ctx.Rentals.RemoveRange(ctx.Rentals);
         ctx.Lodgings.RemoveRange(ctx.Lodgings);
         ctx.Images.RemoveRange(ctx.Images);
+
         await ctx.SaveChangesAsync();
       }
 
       using (var ctx = new LodgingContext(Options))
       {
         var lodgings = new Repository<LodgingModel>(ctx);
-
         var actual = await lodgings.SelectAsync();
 
         Assert.Empty(actual);
@@ -145,7 +147,6 @@ namespace RVTR.Lodging.Testing.Tests
       using (var ctx = new LodgingContext(Options))
       {
         var rentals = new Repository<RentalModel>(ctx);
-
         var actual = await rentals.SelectAsync();
 
         Assert.Empty(actual);
@@ -154,7 +155,6 @@ namespace RVTR.Lodging.Testing.Tests
       using (var ctx = new LodgingContext(Options))
       {
         var reviews = new Repository<ReviewModel>(ctx);
-
         var actual = await reviews.SelectAsync();
 
         Assert.Empty(actual);
@@ -162,49 +162,9 @@ namespace RVTR.Lodging.Testing.Tests
       using (var ctx = new LodgingContext(Options))
       {
         var images = new Repository<ImageModel>(ctx);
-
         var actual = await images.SelectAsync();
 
         Assert.Empty(actual);
-      }
-    }
-
-    [Fact]
-    public async void Test_Repository_SelectAsync_ById()
-    {
-      using (var ctx = new LodgingContext(Options))
-      {
-        ctx.Rentals.RemoveRange(ctx.Rentals);
-        ctx.Lodgings.RemoveRange(ctx.Lodgings);
-        ctx.Images.RemoveRange(ctx.Images);
-        await ctx.SaveChangesAsync();
-      }
-
-      using (var ctx = new LodgingContext(Options))
-      {
-        var lodgings = new Repository<LodgingModel>(ctx);
-
-        await Assert.ThrowsAsync<KeyNotFoundException>(async () => await lodgings.SelectAsync(1));
-      }
-
-      using (var ctx = new LodgingContext(Options))
-      {
-        var rentals = new Repository<RentalModel>(ctx);
-
-        await Assert.ThrowsAsync<KeyNotFoundException>(async () => await rentals.SelectAsync(1));
-      }
-
-      using (var ctx = new LodgingContext(Options))
-      {
-        var reviews = new Repository<ReviewModel>(ctx);
-
-        await Assert.ThrowsAsync<KeyNotFoundException>(async () => await reviews.SelectAsync(1));
-      }
-      using (var ctx = new LodgingContext(Options))
-      {
-        var images = new Repository<ImageModel>(ctx);
-
-        await Assert.ThrowsAsync<KeyNotFoundException>(async () => await images.SelectAsync(1));
       }
     }
 
@@ -217,6 +177,7 @@ namespace RVTR.Lodging.Testing.Tests
         ctx.Rentals.RemoveRange(ctx.Rentals);
         ctx.Lodgings.RemoveRange(ctx.Lodgings);
         ctx.Images.RemoveRange(ctx.Images);
+
         await ctx.Lodgings.AddAsync(lodging);
         await ctx.Rentals.AddAsync(rental);
         await ctx.Reviews.AddAsync(review);
@@ -232,7 +193,7 @@ namespace RVTR.Lodging.Testing.Tests
         lodgingToUpdate.Name = "Name";
         lodgings.Update(lodgingToUpdate);
 
-        var result = ctx.Lodgings.Find(lodging.Id);
+        var result = ctx.Lodgings.Find(lodging.EntityId);
         Assert.Equal(lodgingToUpdate.Name, result.Name);
         Assert.Equal(EntityState.Modified, ctx.Entry(result).State);
       }
@@ -245,7 +206,7 @@ namespace RVTR.Lodging.Testing.Tests
         rentalToUpdate.LotNumber = "4";
         rentals.Update(rentalToUpdate);
 
-        var result = ctx.Rentals.Find(rental.Id);
+        var result = ctx.Rentals.Find(rental.EntityId);
         Assert.Equal(rentalToUpdate.LotNumber, result.LotNumber);
         Assert.Equal(EntityState.Modified, ctx.Entry(result).State);
       }
@@ -258,7 +219,7 @@ namespace RVTR.Lodging.Testing.Tests
         reviewToUpdate.Comment = "Comment";
         reviews.Update(reviewToUpdate);
 
-        var result = ctx.Reviews.Find(review.Id);
+        var result = ctx.Reviews.Find(review.EntityId);
         Assert.Equal(reviewToUpdate.Comment, result.Comment);
         Assert.Equal(EntityState.Modified, ctx.Entry(result).State);
       }
@@ -271,7 +232,7 @@ namespace RVTR.Lodging.Testing.Tests
         imageToUpdate.ImageUri = "https://test.jpg";
         images.Update(imageToUpdate);
 
-        var result = ctx.Images.Find(image.Id);
+        var result = ctx.Images.Find(image.EntityId);
         Assert.Equal(imageToUpdate.ImageUri, result.ImageUri);
         Assert.Equal(EntityState.Modified, ctx.Entry(result).State);
       }

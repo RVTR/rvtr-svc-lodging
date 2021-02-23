@@ -1,19 +1,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using RVTR.Lodging.Domain.Abstracts;
 
 namespace RVTR.Lodging.Domain.Models
 {
   /// <summary>
   /// Represents the _Address_ model
   /// </summary>
-  public class AddressModel : IValidatableObject
+  public class AddressModel : AEntity, IValidatableObject
   {
-    /// <summary>
-    /// Id for the address model
-    /// </summary>
-    /// <value></value>
-    public int Id { get; set; }
-
     /// <summary>
     /// City property must have a capitalized first initial
     /// </summary>

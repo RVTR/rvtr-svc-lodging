@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using RVTR.Lodging.Domain.Abstracts;
 using RVTR.Lodging.Domain.Attributes;
 
 namespace RVTR.Lodging.Domain.Models
@@ -8,14 +9,8 @@ namespace RVTR.Lodging.Domain.Models
   /// <summary>
   /// Represents the _Rental_ model
   /// </summary>
-  public class RentalModel : IValidatableObject
+  public class RentalModel : AEntity, IValidatableObject
   {
-    /// <summary>
-    /// The Id of the rental model
-    /// </summary>
-    /// <value></value>
-    public int Id { get; set; }
-
     /// <summary>
     /// The lot number of the rental model
     /// </summary>
@@ -49,8 +44,6 @@ namespace RVTR.Lodging.Domain.Models
     /// </summary>
     /// <value></value>
     public int? LodgingModelId { get; set; }
-
-
 
     /// <summary>
     /// The capacity of the campsite

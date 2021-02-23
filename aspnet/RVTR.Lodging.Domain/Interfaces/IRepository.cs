@@ -1,22 +1,44 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
+using RVTR.Lodging.Domain.Abstracts;
 
 namespace RVTR.Lodging.Domain.Interfaces
 {
-  /// <summary>
-  /// Interface that provides CRUD methods for different entities depending on the given generic type
-  /// </summary>
-  /// <typeparam name="TEntity">The Entity which needs CRUD operations</typeparam>
-  public interface IRepository<TEntity> where TEntity : class
+  public interface IRepository<TEntity> where TEntity : AEntity
   {
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     Task DeleteAsync(int id);
 
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="entry"></param>
+    /// <returns></returns>
     Task InsertAsync(TEntity entry);
 
+    /// <summary>
+    ///
+    /// </summary>
+    /// <returns></returns>
     Task<IEnumerable<TEntity>> SelectAsync();
 
-    Task<TEntity> SelectAsync(int id);
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="predicate"></param>
+    /// <returns></returns>
+    Task<IEnumerable<TEntity>> SelectAsync(Expression<Func<TEntity, bool>> predicate);
 
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="entry"></param>
     void Update(TEntity entry);
   }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using Moq;
 using RVTR.Lodging.Domain.Interfaces;
@@ -17,14 +18,14 @@ namespace RVTR.Lodging.Testing.Tests
     public LodgingControllerTest()
     {
       var loggerMock = new Mock<ILogger<LodgingController>>();
-      var repositoryMock = new Mock<ILodgingRepo>();
+      var repositoryMock = new Mock<IRepository<LodgingModel>>();
       var unitOfWorkMock = new Mock<IUnitOfWork>();
 
       repositoryMock.Setup(m => m.SelectAsync()).ReturnsAsync((IEnumerable<LodgingModel>)null);
-      repositoryMock.Setup(m => m.SelectAsync(-1)).Throws(new KeyNotFoundException());
-      repositoryMock.Setup(m => m.SelectAsync(0)).ReturnsAsync(new LodgingModel());
-      repositoryMock.Setup(m => m.SelectAsync(1)).ReturnsAsync((LodgingModel)null);
-      repositoryMock.Setup(m => m.SelectAsync(2)).ReturnsAsync(new LodgingModel() { Id = 2, AddressId = 2, Name = "name", Bathrooms = 1 });
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == -1)).Throws(new KeyNotFoundException());
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 0)).ReturnsAsync(new List<LodgingModel>());
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 1)).ReturnsAsync((IEnumerable<LodgingModel>)null);
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 2)).ReturnsAsync(new [] {new LodgingModel() { EntityId = 2, AddressId = 2, Name = "name", Bathrooms = 1 }});
       unitOfWorkMock.Setup(m => m.Lodging).Returns(repositoryMock.Object);
 
       _logger = loggerMock.Object;
@@ -71,7 +72,7 @@ namespace RVTR.Lodging.Testing.Tests
     [Fact]
     public async void Test_Controller_Put()
     {
-      LodgingModel lodgingmodel = await _unitOfWork.Lodging.SelectAsync(2);
+      LodgingModel lodgingmodel = (await _unitOfWork.Lodging.SelectAsync(e => e.EntityId == 2)).FirstOrDefault();
 
       var resultPass = await _controller.Put(lodgingmodel);
       var resultFail = await _controller.Put(null);
@@ -79,8 +80,8 @@ namespace RVTR.Lodging.Testing.Tests
       Assert.NotNull(resultPass);
       Assert.NotNull(resultFail);
 
-      LodgingModel lodgingModelBadId = await _unitOfWork.Lodging.SelectAsync(2);
-      lodgingModelBadId.Id = -1;
+      LodgingModel lodgingModelBadId = (await _unitOfWork.Lodging.SelectAsync(e => e.EntityId == 2)).FirstOrDefault();
+      lodgingModelBadId.EntityId = -1;
 
       var resultFail2 = await _controller.Put(lodgingModelBadId);
 

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using Moq;
@@ -26,10 +27,10 @@ namespace RVTR.Lodging.Testing.Tests
       repositoryMock.Setup(m => m.DeleteAsync(1)).Returns(Task.CompletedTask);
       repositoryMock.Setup(m => m.InsertAsync(It.IsAny<RentalModel>())).Returns(Task.CompletedTask);
       repositoryMock.Setup(m => m.SelectAsync()).ReturnsAsync((IEnumerable<RentalModel>)null);
-      repositoryMock.Setup(m => m.SelectAsync(-1)).Throws(new KeyNotFoundException());
-      repositoryMock.Setup(m => m.SelectAsync(0)).Throws(new Exception());
-      repositoryMock.Setup(m => m.SelectAsync(1)).ReturnsAsync((RentalModel)null);
-      repositoryMock.Setup(m => m.SelectAsync(2)).ReturnsAsync(new RentalModel() { Id = 2, LotNumber = "2", Status = "Available", Price = 1.00 });
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == -1)).Throws(new KeyNotFoundException());
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 0)).Throws(new Exception());
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 1)).ReturnsAsync((IEnumerable<RentalModel>)null);
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 2)).ReturnsAsync(new [] { new RentalModel() { EntityId = 2, LotNumber = "2", Status = "Available", Price = 1.00 }});
       repositoryMock.Setup(m => m.Update(It.IsAny<RentalModel>()));
       unitOfWorkMock.Setup(m => m.Rental).Returns(repositoryMock.Object);
 
@@ -71,7 +72,7 @@ namespace RVTR.Lodging.Testing.Tests
     [Fact]
     public async void Test_Controller_Put()
     {
-      RentalModel rentalmodel = await _unitOfWork.Rental.SelectAsync(2);
+      RentalModel rentalmodel = (await _unitOfWork.Rental.SelectAsync(e => e.EntityId == 2)).FirstOrDefault();
 
       var resultPass = await _controller.Put(rentalmodel);
       var resultFail = await _controller.Put(null);
@@ -79,8 +80,8 @@ namespace RVTR.Lodging.Testing.Tests
       Assert.NotNull(resultPass);
       Assert.NotNull(resultFail);
 
-      RentalModel rentalModelBadId = await _unitOfWork.Rental.SelectAsync(2);
-      rentalModelBadId.Id = -1;
+      RentalModel rentalModelBadId = (await _unitOfWork.Rental.SelectAsync(e => e.EntityId == 2)).FirstOrDefault();
+      rentalModelBadId.EntityId = -1;
 
       var resultFail2 = await _controller.Put(rentalModelBadId);
 

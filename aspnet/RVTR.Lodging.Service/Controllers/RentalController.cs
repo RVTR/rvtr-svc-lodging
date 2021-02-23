@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -44,10 +45,12 @@ namespace RVTR.Lodging.Service.Controllers
       try
       {
         _logger.LogInformation($"Deleting a rental @ id = {id}...");
-        var rental = await _unitOfWork.Rental.SelectAsync(id);
-        await _unitOfWork.Rental.DeleteAsync(rental.Id);
+        var rental = (await _unitOfWork.Rental.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
+
+        await _unitOfWork.Rental.DeleteAsync(rental.EntityId);
         await _unitOfWork.CommitAsync();
-        _logger.LogInformation($"Successfully deleted a rental @ id = {rental.Id}.");
+
+        _logger.LogInformation($"Successfully deleted a rental @ id = {rental.EntityId}.");
         return Ok();
       }
       catch (KeyNotFoundException e)
@@ -79,7 +82,7 @@ namespace RVTR.Lodging.Service.Controllers
       try
       {
         _logger.LogInformation($"Getting a rental @ id = {id}...");
-        var rental = await _unitOfWork.Rental.SelectAsync(id);
+        var rental = await _unitOfWork.Rental.SelectAsync(e => e.EntityId == id);
         return Ok(rental);
       }
       catch (KeyNotFoundException e)
@@ -117,10 +120,12 @@ namespace RVTR.Lodging.Service.Controllers
       try
       {
         _logger.LogInformation($"Updating a rental @ {rental}...");
-        var selectedRental = await _unitOfWork.Rental.SelectAsync(rental.Id);
+        var selectedRental = (await _unitOfWork.Rental.SelectAsync(e => e.EntityId == rental.EntityId)).FirstOrDefault();
+
         _unitOfWork.Rental.Update(selectedRental);
         await _unitOfWork.CommitAsync();
         _logger.LogInformation($"Successfully updated a rental @ {selectedRental}.");
+
         return Accepted(selectedRental);
       }
       catch (NullReferenceException e)
@@ -131,7 +136,7 @@ namespace RVTR.Lodging.Service.Controllers
       catch (KeyNotFoundException e)
       {
         _logger.LogInformation(e, "Caught: {e.Message}. Id = {rental.Id}", e, rental);
-        return NotFound(rental.Id);
+        return NotFound(rental.EntityId);
       }
     }
   }

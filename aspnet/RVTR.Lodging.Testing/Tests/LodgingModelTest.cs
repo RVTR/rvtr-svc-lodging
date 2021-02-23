@@ -13,7 +13,7 @@ namespace RVTR.Lodging.Testing.Tests
       {
         new LodgingModel
         {
-          Id = 0,
+          EntityId = 0,
           Address = new AddressModel(),
           Name = "Name",
           Bathrooms = 1,

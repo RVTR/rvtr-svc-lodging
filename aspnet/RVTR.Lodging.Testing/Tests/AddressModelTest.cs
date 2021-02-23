@@ -16,7 +16,7 @@ namespace RVTR.Lodging.Testing.Tests
       {
         new AddressModel
         {
-          Id = 0,
+          EntityId = 0,
           City = "City",
           Country = "USA",
           Longitude = "00.000",

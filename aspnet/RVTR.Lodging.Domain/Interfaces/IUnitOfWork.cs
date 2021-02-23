@@ -5,11 +5,15 @@ namespace RVTR.Lodging.Domain.Interfaces
 {
   public interface IUnitOfWork
   {
-    ILodgingRepo Lodging { get; }
-    IRepository<RentalModel> Rental { get; set; }
-    IRepository<ReviewModel> Review { get; set; }
-    IRepository<ImageModel> Image { get; set; }
+    IRepository<LodgingModel> Lodging { get; }
+    IRepository<RentalModel> Rental { get; }
+    IRepository<ReviewModel> Review { get; }
+    IRepository<ImageModel> Image { get; }
 
+    /// <summary>
+    ///
+    /// </summary>
+    /// <returns></returns>
     Task<int> CommitAsync();
   }
 }

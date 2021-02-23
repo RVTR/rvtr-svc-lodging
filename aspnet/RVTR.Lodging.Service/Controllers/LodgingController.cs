@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -58,7 +59,7 @@ namespace RVTR.Lodging.Service.Controllers
       try
       {
         _logger.LogInformation($"Getting a lodging @ id = {id}...");
-        var lodging = await _unitOfWork.Lodging.SelectAsync(id);
+        var lodging = await _unitOfWork.Lodging.SelectAsync(e => e.EntityId == id);
         return Ok(lodging);
       }
       catch (KeyNotFoundException e)
@@ -72,17 +73,22 @@ namespace RVTR.Lodging.Service.Controllers
     /// Gets all lodgings with available rentals by City, State/Province, Country and occupancy
     /// </summary>
     /// <param name="city">The city</param>
-    /// <param name="state">The state/province</param>
+    /// <param name="stateProvince">The state/province</param>
     /// <param name="country">The country</param>
     /// <param name="occupancy">The occupancy</param>
     /// <returns>The filtered Lodgings</returns>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<LodgingModel>), StatusCodes.Status200OK)]
     [Route("available")]
-    public async Task<IActionResult> GetLodgingsByLocationAndOccupancy(string city, string state, string country, int occupancy)
+    public async Task<IActionResult> Get(string city, string stateProvince, string country, int occupancy)
     {
-      _logger.LogInformation($"Getting all available lodgings matching City: {city}, State: {state}, Country: {country}, Occupancy: {occupancy}...");
-      return Ok(await _unitOfWork.Lodging.LodgingByLocationAndOccupancy(occupancy, city, state, country));
+      _logger.LogInformation($"Getting all available lodgings matching City: {city}, State: {stateProvince}, Country: {country}, Occupancy: {occupancy}...");
+
+      return Ok(await _unitOfWork.Lodging.SelectAsync(e =>
+        (e.Address.City.ToLower() == city.ToLower()) &&
+        (e.Address.StateProvince.ToLower() == stateProvince.ToLower()) &&
+        (e.Address.Country.ToLower() == country.ToLower()) &&
+        (e.Rentals.Any(r => r.Status == "Available" && r.Capacity >= occupancy))));
     }
 
     /// <summary>
@@ -96,10 +102,11 @@ namespace RVTR.Lodging.Service.Controllers
       try
       {
         _logger.LogInformation($"Deleting a lodging @ id = {id}...");
-        LodgingModel lodge = await _unitOfWork.Lodging.SelectAsync(id);
-        await _unitOfWork.Lodging.DeleteAsync(lodge.Id);
+        LodgingModel lodge = (await _unitOfWork.Lodging.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
+
+        await _unitOfWork.Lodging.DeleteAsync(lodge.EntityId);
         await _unitOfWork.CommitAsync();
-        _logger.LogInformation($"Successfully deleted a lodging @ id = {lodge.Id}.");
+        _logger.LogInformation($"Successfully deleted a lodging @ id = {lodge.EntityId}.");
         return Ok();
       }
       catch (KeyNotFoundException e)
@@ -137,7 +144,7 @@ namespace RVTR.Lodging.Service.Controllers
       try
       {
         _logger.LogInformation($"Updating a lodging @ {lodging}...");
-        var newlodging = await _unitOfWork.Lodging.SelectAsync(lodging.Id);
+        var newlodging = (await _unitOfWork.Lodging.SelectAsync(e => e.EntityId == lodging.EntityId)).FirstOrDefault();
         _unitOfWork.Lodging.Update(newlodging);
         await _unitOfWork.CommitAsync();
         _logger.LogInformation($"Successfully updated a lodging @ {newlodging}.");
@@ -151,7 +158,7 @@ namespace RVTR.Lodging.Service.Controllers
       catch (KeyNotFoundException e)
       {
         _logger.LogInformation(e, "Caught: {e.Message}. Id = {lodging.Id}.", e, lodging);
-        return NotFound(lodging.Id);
+        return NotFound(lodging.EntityId);
       }
     }
   }

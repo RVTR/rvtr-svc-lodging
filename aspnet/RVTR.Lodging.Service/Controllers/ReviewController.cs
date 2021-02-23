@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -44,10 +45,11 @@ namespace RVTR.Lodging.Service.Controllers
       try
       {
         _logger.LogInformation($"Deleting a review @ id = {id}...");
-        var review = await _unitOfWork.Review.SelectAsync(id);
-        await _unitOfWork.Review.DeleteAsync(review.Id);
+        var review = (await _unitOfWork.Review.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
+        
+        await _unitOfWork.Review.DeleteAsync(review.EntityId);
         await _unitOfWork.CommitAsync();
-        _logger.LogInformation($"Successfully deleted a review @ id = {review.Id}.");
+        _logger.LogInformation($"Successfully deleted a review @ id = {review.EntityId}.");
         return Ok();
       }
       catch (KeyNotFoundException e)
@@ -79,7 +81,7 @@ namespace RVTR.Lodging.Service.Controllers
       try
       {
         _logger.LogInformation($"Getting a review @ id = {id}...");
-        var review = await _unitOfWork.Review.SelectAsync(id);
+        var review = await _unitOfWork.Review.SelectAsync(e => e.EntityId == id);
         return Ok(review);
       }
       catch (KeyNotFoundException e)
@@ -117,7 +119,8 @@ namespace RVTR.Lodging.Service.Controllers
       try
       {
         _logger.LogInformation($"Updating a review @ {review}...");
-        var selectedReview = await _unitOfWork.Review.SelectAsync(review.Id);
+        var selectedReview = (await _unitOfWork.Review.SelectAsync(e => e.EntityId == review.EntityId)).FirstOrDefault();
+
         _unitOfWork.Review.Update(selectedReview);
         await _unitOfWork.CommitAsync();
         _logger.LogInformation($"Successfully updated a review @ {selectedReview}.");
@@ -131,7 +134,7 @@ namespace RVTR.Lodging.Service.Controllers
       catch (KeyNotFoundException e)
       {
         _logger.LogInformation(e, "Caught: {e.Message}. Id = {review.Id}", e, review);
-        return NotFound(review.Id);
+        return NotFound(review.EntityId);
       }
     }
   }

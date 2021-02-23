@@ -6,23 +6,22 @@ using RVTR.Lodging.Domain.Models;
 namespace RVTR.Lodging.Context.Repositories
 {
   /// <summary>
-  /// Represents the _UnitOfWork_ repository
+  /// Represents the _UnitOfWork_ class
   /// </summary>
-  public class UnitOfWork : IUnitOfWork, IDisposable
+  public class UnitOfWork : IUnitOfWork
   {
     private readonly LodgingContext _context;
-    private bool _disposedValue;
 
-    public ILodgingRepo Lodging { get; }
-    public IRepository<RentalModel> Rental { get; set; }
-    public IRepository<ReviewModel> Review { get; set; }
-    public IRepository<ImageModel> Image { get; set; }
+    public IRepository<LodgingModel> Lodging { get; }
+    public IRepository<RentalModel> Rental { get; }
+    public IRepository<ReviewModel> Review { get; }
+    public IRepository<ImageModel> Image { get; }
 
     public UnitOfWork(LodgingContext context)
     {
       _context = context;
 
-      Lodging = new LodgingRepo(context);
+      Lodging = new Repository<LodgingModel>(context);
       Rental = new Repository<RentalModel>(context);
       Review = new Repository<ReviewModel>(context);
       Image = new Repository<ImageModel>(context);
@@ -33,22 +32,5 @@ namespace RVTR.Lodging.Context.Repositories
     /// </summary>
     /// <returns></returns>
     public async Task<int> CommitAsync() => await _context.SaveChangesAsync();
-
-    protected virtual void Dispose(bool disposing)
-    {
-      if (!_disposedValue)
-      {
-        if (disposing)
-        {
-          _context.Dispose();
-        }
-        _disposedValue = true;
-      }
-    }
-    public void Dispose()
-    {
-      Dispose(disposing: true);
-      GC.SuppressFinalize(this);
-    }
   }
 }

@@ -1,15 +1,11 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using RVTR.Lodging.Domain.Abstracts;
 
 namespace RVTR.Lodging.Domain.Models
 {
-  public class ImageModel : IValidatableObject
+  public class ImageModel : AEntity, IValidatableObject
   {
-    /// <summary>
-    /// Id number for image
-    /// </summary>
-    public int Id { get; set; }
-
     /// <summary>
     /// Lodging model id (foreign key)
     /// </summary>

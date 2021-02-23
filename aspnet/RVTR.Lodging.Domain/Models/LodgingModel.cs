@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using RVTR.Lodging.Domain.Abstracts;
 using RVTR.Lodging.Domain.Attributes;
 
 namespace RVTR.Lodging.Domain.Models
@@ -7,15 +8,8 @@ namespace RVTR.Lodging.Domain.Models
   /// <summary>
   /// Represents the _Lodging_ model
   /// </summary>
-  public class LodgingModel : IValidatableObject
+  public class LodgingModel : AEntity, IValidatableObject
   {
-
-    /// <summary>
-    /// id of the lodging model in the db
-    /// </summary>
-    /// <value></value>
-    public int Id { get; set; }
-
     /// <summary>
     /// Address id of the lodging's location
     /// </summary>

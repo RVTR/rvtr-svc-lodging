@@ -14,7 +14,7 @@ namespace RVTR.Lodging.Testing.Tests
       {
         new ReviewModel
         {
-          Id = 0,
+          EntityId = 0,
           AccountId = 0,
           Comment = "Comment",
           DateCreated = DateTime.Now,

@@ -14,7 +14,7 @@ services:
     networks:
       - locally
     ports:
-      - 8003:80
+      - 8002:80
 
   data:
     environment:
@@ -28,6 +28,6 @@ services:
     networks:
       - locally
     ports:
-      - 9003:9411
+      - 9002:9411
 
 version: '3.8'

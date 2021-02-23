@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using RVTR.Lodging.Domain.Abstracts;
 using RVTR.Lodging.Domain.Attributes;
 
 namespace RVTR.Lodging.Domain.Models
@@ -8,10 +9,8 @@ namespace RVTR.Lodging.Domain.Models
   /// <summary>
   /// Represents the _Review_ model
   /// </summary>
-  public class ReviewModel : IValidatableObject
+  public class ReviewModel : AEntity, IValidatableObject
   {
-    public int Id { get; set; }
-
     public int AccountId { get; set; }
 
     [Required(ErrorMessage = "Must have a comment.")]
