@@ -59,7 +59,8 @@ namespace RVTR.Lodging.Service.Controllers
       try
       {
         _logger.LogInformation($"Getting a lodging @ id = {id}...");
-        var lodging = await _unitOfWork.Lodging.SelectAsync(e => e.EntityId == id);
+        var lodging = (await _unitOfWork.Lodging.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
+        
         return Ok(lodging);
       }
       catch (KeyNotFoundException e)

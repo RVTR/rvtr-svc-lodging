@@ -44,7 +44,10 @@ namespace RVTR.Lodging.Context.Repositories
     ///
     /// </summary>
     /// <returns></returns>
-    public virtual async Task<IEnumerable<TEntity>> SelectAsync() => await _dbSet.ToListAsync();
+    public virtual async Task<IEnumerable<TEntity>> SelectAsync()
+    {
+      return await LoadAsync(await _dbSet.ToListAsync());
+    }
 
     /// <summary>
     ///
@@ -53,8 +56,22 @@ namespace RVTR.Lodging.Context.Repositories
     /// <returns></returns>
     public virtual async Task<IEnumerable<TEntity>> SelectAsync(Expression<Func<TEntity, bool>> predicate)
     {
-      var entities = await _dbSet.Where(predicate).ToListAsync().ConfigureAwait(true);
+      return await LoadAsync(await _dbSet.Where(predicate).ToListAsync().ConfigureAwait(true));
+    }
 
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="entry"></param>
+    public virtual void Update(TEntity entry) => _dbSet.Update(entry);
+
+    /// <summary>
+    ///
+    /// </summary>
+    /// <param name="entities"></param>
+    /// <returns></returns>
+    private async Task<IEnumerable<TEntity>> LoadAsync(IEnumerable<TEntity> entities)
+    {
       foreach (var entity in entities)
       {
         foreach (var navigation in _dbSet.Attach(entity).Navigations)
@@ -65,11 +82,5 @@ namespace RVTR.Lodging.Context.Repositories
 
       return entities;
     }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="entry"></param>
-    public virtual void Update(TEntity entry) => _dbSet.Update(entry);
   }
 }
