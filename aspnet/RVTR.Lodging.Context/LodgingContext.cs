@@ -61,6 +61,13 @@ namespace RVTR.Lodging.Context
     /// <param name="modelBuilder"></param>
     private void OnDataSeeding(ModelBuilder modelBuilder)
     {
+      modelBuilder.Entity<AddressModel>().HasData(new List<AddressModel>()
+      {
+        new AddressModel() { EntityId = 1, City = "Palm Bay", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "32908", StateProvince = "FL", Street = "750 Osmosis Dr SW" },
+        new AddressModel() { EntityId = 2, City = "Afton", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "22920", StateProvince = "VA", Street = "8801 Dick Woods Rd" },
+        new AddressModel() { EntityId = 3, City = "Hanna", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "84031", StateProvince = "UT", Street = "5761 Upper, Red Creek Rd" },
+        new AddressModel() { EntityId = 4, City = "Topanga", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "90290", StateProvince = "CA", Street = "101 S Topanga Canyon Blvd" },
+      });
       modelBuilder.Entity<LodgingModel>().HasData(new List<LodgingModel>()
       {
         new LodgingModel() { EntityId = 1, AddressId = 1, Name = "Dragon Fly", Bathrooms = 2 },
@@ -118,14 +125,6 @@ namespace RVTR.Lodging.Context
         new ImageModel() {EntityId = 26, LodgingModelId = 4, ImageUri = "https://www.turbopass.com/3843-carousel/desert-sunset-experience.jpg"},
         new ImageModel() {EntityId = 27, LodgingModelId = 4, ImageUri = "https://www.kcet.org/sites/kl/files/atoms/article_atoms/www.kcet.org/living/travel/socal_wanderer/jumbo-rocks-campground-joshua-tree.jpeg"},
         new ImageModel() {EntityId = 28, LodgingModelId = 4, ImageUri = "https://upload.wikimedia.org/wikipedia/commons/6/67/Desert_Fox_Pups.jpg"},
-      });
-
-      modelBuilder.Entity<AddressModel>().HasData(new List<AddressModel>()
-      {
-        new AddressModel() { EntityId = 1, City = "Palm Bay", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "32908", StateProvince = "FL", Street = "750 Osmosis Dr SW" },
-        new AddressModel() { EntityId = 2, City = "Afton", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "22920", StateProvince = "VA", Street = "8801 Dick Woods Rd" },
-        new AddressModel() { EntityId = 3, City = "Hanna", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "84031", StateProvince = "UT", Street = "5761 Upper, Red Creek Rd" },
-        new AddressModel() { EntityId = 4, City = "Topanga", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "90290", StateProvince = "CA", Street = "101 S Topanga Canyon Blvd" },
       });
     }
   }
