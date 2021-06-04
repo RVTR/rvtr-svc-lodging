@@ -49,8 +49,7 @@ namespace RVTR.Lodging.Domain.Models
     /// The capacity of the campsite
     /// </summary>
     /// <value></value>
-    [Range(1, 1000, ErrorMessage = "Capacity must be between 1 and 1000")]
-    public int Capacity { get; set; }
+  public Dictionary<string, int> Capacity { get; set; }
 
     /// <summary>
     /// The name of the campsite
