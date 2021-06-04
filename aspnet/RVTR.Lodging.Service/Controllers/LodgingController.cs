@@ -60,7 +60,7 @@ namespace RVTR.Lodging.Service.Controllers
       {
         _logger.LogInformation($"Getting a lodging @ id = {id}...");
         var lodging = (await _unitOfWork.Lodging.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
-        
+
         return Ok(lodging);
       }
       catch (KeyNotFoundException e)
@@ -90,7 +90,7 @@ namespace RVTR.Lodging.Service.Controllers
         (e.Address.City.ToLower() == city.ToLower()) &&
         (e.Address.StateProvince.ToLower() == stateProvince.ToLower()) &&
         (e.Address.Country.ToLower() == country.ToLower()) &&
-        (e.Rentals.Any(r => r.Status == "Available" && r.Capacity["People"] >= occupancy && r.Capacity["Cars"] >= cars))));
+        (e.Rentals.Any(r => r.Status == "Available" && r.Capacity.First(c => c.Type == "People").Quanitity >= occupancy && r.Capacity.First(c => c.Type == "Cars").Quanitity >= cars))));
     }
 
     /// <summary>
