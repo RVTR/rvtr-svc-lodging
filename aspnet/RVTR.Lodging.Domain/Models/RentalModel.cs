@@ -49,7 +49,7 @@ namespace RVTR.Lodging.Domain.Models
     /// The capacity of the campsite
     /// </summary>
     /// <value></value>
-  public Dictionary<string, int> Capacity { get; set; }
+    public List<CapacityModel> Capacity { get; set; }
 
     /// <summary>
     /// The name of the campsite
