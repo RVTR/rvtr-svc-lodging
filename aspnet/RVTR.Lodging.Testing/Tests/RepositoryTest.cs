@@ -31,6 +31,7 @@ namespace RVTR.Lodging.Testing.Tests
         ctx.Rentals.RemoveRange(ctx.Rentals);
         ctx.Lodgings.RemoveRange(ctx.Lodgings);
         ctx.Images.RemoveRange(ctx.Images);
+        ctx.Capacity.RemoveRange(ctx.Capacity);
 
         await ctx.Rentals.AddAsync(rental);
         await ctx.Reviews.AddAsync(review);
@@ -84,6 +85,7 @@ namespace RVTR.Lodging.Testing.Tests
         ctx.Rentals.RemoveRange(ctx.Rentals);
         ctx.Lodgings.RemoveRange(ctx.Lodgings);
         ctx.Images.RemoveRange(ctx.Images);
+        ctx.Capacity.RemoveRange(ctx.Capacity);
 
         await ctx.SaveChangesAsync();
       }
@@ -132,6 +134,7 @@ namespace RVTR.Lodging.Testing.Tests
         ctx.Rentals.RemoveRange(ctx.Rentals);
         ctx.Lodgings.RemoveRange(ctx.Lodgings);
         ctx.Images.RemoveRange(ctx.Images);
+        ctx.Capacity.RemoveRange(ctx.Capacity);
 
         await ctx.SaveChangesAsync();
       }
@@ -177,6 +180,7 @@ namespace RVTR.Lodging.Testing.Tests
         ctx.Rentals.RemoveRange(ctx.Rentals);
         ctx.Lodgings.RemoveRange(ctx.Lodgings);
         ctx.Images.RemoveRange(ctx.Images);
+        ctx.Capacity.RemoveRange(ctx.Capacity);
 
         await ctx.Lodgings.AddAsync(lodging);
         await ctx.Rentals.AddAsync(rental);

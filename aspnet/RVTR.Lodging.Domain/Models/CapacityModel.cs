@@ -1,4 +1,5 @@
 using RVTR.Lodging.Domain.Abstracts;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace RVTR.Lodging.Domain.Models
@@ -8,6 +9,13 @@ namespace RVTR.Lodging.Domain.Models
   /// </summary>
   public class CapacityModel : AEntity
   {
+    public List<int> RentalId { get; set; }
+
+    /// <summary>
+    /// The List of rental object
+    /// </summary>
+    /// <value></value>
+    public List<RentalModel> Rental { get; set; }
     /// <summary>
     /// The type of Capacity (Cars, Pets, etc.)
     /// </summary>

@@ -49,7 +49,7 @@ namespace RVTR.Lodging.Domain.Models
     /// The List of Id of Capacity Model
     /// </summary>
     /// <value></value>
-    public List<int?> CapacityId { get; set; }
+    public List<int> CapacityId { get; set; }
     /// <summary>
     /// The capacity of the campsite
     /// </summary>

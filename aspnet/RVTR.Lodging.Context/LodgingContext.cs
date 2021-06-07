@@ -38,6 +38,8 @@ namespace RVTR.Lodging.Context
     /// </summary>
     /// <param name="options"></param>
     /// <returns></returns>
+
+    public DbSet<CapacityModel> Capacity { get; set; }
     public LodgingContext(DbContextOptions<LodgingContext> options) : base(options) { }
 
     /// <summary>
@@ -51,6 +53,7 @@ namespace RVTR.Lodging.Context
       modelBuilder.Entity<RentalModel>().HasKey(e => e.EntityId);
       modelBuilder.Entity<ReviewModel>().HasKey(e => e.EntityId);
       modelBuilder.Entity<ImageModel>().HasKey(e => e.EntityId);
+      modelBuilder.Entity<CapacityModel>().HasKey(e => e.EntityId);
 
       OnDataSeeding(modelBuilder);
     }
@@ -83,18 +86,18 @@ namespace RVTR.Lodging.Context
 
       modelBuilder.Entity<RentalModel>().HasData(new List<RentalModel>()
       {
-               new RentalModel() { EntityId = 1, LodgingModelId = 1, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, CapacityId = new List<int?>(){1, 4}, SiteName = "Tent", Size = "5x5" },
-        new RentalModel() { EntityId = 2, LodgingModelId = 1, LotNumber = "101", Status = "Available", Price = 300, DiscountedPrice = 280, CapacityId = new List<int?>(){2, 5} , SiteName = "RV", Size = "10x10" },
-        new RentalModel() { EntityId = 3, LodgingModelId = 1, LotNumber = "102", Status = "Booked", Price = 300, DiscountedPrice = 280, CapacityId = new List<int?>(){2, 4}, SiteName = "RV", Size = "10x10" },
-        new RentalModel() { EntityId = 4, LodgingModelId = 1, LotNumber = "103", Status = "Booked", Price = 100, DiscountedPrice = 70, CapacityId = new List<int?>(){1, 4}, SiteName = "Tent", Size = "5x5" },
-        new RentalModel() { EntityId = 5, LodgingModelId = 2, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, CapacityId = new List<int?>(){1, 6}, SiteName = "Tent", Size = "5x5" },
-        new RentalModel() { EntityId = 6, LodgingModelId = 2, LotNumber = "101", Status = "Available", Price = 300, DiscountedPrice = 280, CapacityId = new List<int?>(){1, 6}, SiteName = "RV", Size = "10x10" },
-        new RentalModel() { EntityId = 7, LodgingModelId = 2, LotNumber = "102", Status = "Booked", Price = 300, DiscountedPrice = 280, CapacityId = new List<int?>(){1, 4}, SiteName = "RV", Size = "10x10" },
-        new RentalModel() { EntityId = 8, LodgingModelId = 2, LotNumber = "103", Status = "Booked", Price = 100, DiscountedPrice = 70, CapacityId = new List<int?>(){1, 7}, SiteName = "Tent", Size = "5x5" },
-        new RentalModel() { EntityId = 9, LodgingModelId = 3, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, CapacityId = new List<int?>(){3, 8}, SiteName = "Tent", Size = "5x5" },
-        new RentalModel() { EntityId = 10, LodgingModelId = 3, LotNumber = "101", Status = "Booked", Price = 100, DiscountedPrice = 70, CapacityId = new List<int?>(){3, 6}, SiteName = "Tent", Size = "5x5"  },
-        new RentalModel() { EntityId = 11, LodgingModelId = 4, LotNumber = "100", Status = "Available", Price = 300, DiscountedPrice = 280, CapacityId = new List<int?>(){1, 4}, SiteName = "RV", Size = "10x10" },
-        new RentalModel() { EntityId = 12, LodgingModelId = 4, LotNumber = "101", Status = "Booked", Price = 300, DiscountedPrice = 280, CapacityId = new List<int?>(){1, 4}, SiteName = "RV", Size = "10x10" },
+               new RentalModel() { EntityId = 1, LodgingModelId = 1, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, CapacityId = new List<int>(){1, 4}, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { EntityId = 2, LodgingModelId = 1, LotNumber = "101", Status = "Available", Price = 300, DiscountedPrice = 280, CapacityId = new List<int>(){2, 5} , SiteName = "RV", Size = "10x10" },
+        new RentalModel() { EntityId = 3, LodgingModelId = 1, LotNumber = "102", Status = "Booked", Price = 300, DiscountedPrice = 280, CapacityId = new List<int>(){2, 4}, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { EntityId = 4, LodgingModelId = 1, LotNumber = "103", Status = "Booked", Price = 100, DiscountedPrice = 70, CapacityId = new List<int>(){1, 4}, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { EntityId = 5, LodgingModelId = 2, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, CapacityId = new List<int>(){1, 6}, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { EntityId = 6, LodgingModelId = 2, LotNumber = "101", Status = "Available", Price = 300, DiscountedPrice = 280, CapacityId = new List<int>(){1, 6}, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { EntityId = 7, LodgingModelId = 2, LotNumber = "102", Status = "Booked", Price = 300, DiscountedPrice = 280, CapacityId = new List<int>(){1, 4}, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { EntityId = 8, LodgingModelId = 2, LotNumber = "103", Status = "Booked", Price = 100, DiscountedPrice = 70, CapacityId = new List<int>(){1, 7}, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { EntityId = 9, LodgingModelId = 3, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, CapacityId = new List<int>(){3, 8}, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { EntityId = 10, LodgingModelId = 3, LotNumber = "101", Status = "Booked", Price = 100, DiscountedPrice = 70, CapacityId = new List<int>(){3, 6}, SiteName = "Tent", Size = "5x5"  },
+        new RentalModel() { EntityId = 11, LodgingModelId = 4, LotNumber = "100", Status = "Available", Price = 300, DiscountedPrice = 280, CapacityId = new List<int>(){1, 4}, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { EntityId = 12, LodgingModelId = 4, LotNumber = "101", Status = "Booked", Price = 300, DiscountedPrice = 280, CapacityId = new List<int>(){1, 4}, SiteName = "RV", Size = "10x10" },
       });
 
       modelBuilder.Entity<ImageModel>().HasData(new List<ImageModel>()
