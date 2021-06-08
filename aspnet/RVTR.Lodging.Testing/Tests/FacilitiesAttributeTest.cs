@@ -9,25 +9,25 @@ namespace RVTR.Lodging.Testing.Tests
 {
   public class FacilitiesNumberAttributeTest
   {
-    public static readonly int GoodFacilitiesNumber = 1;
-    public static readonly int BadFacilitiesNumber = 0;
+    private static readonly int GoodFacilitiesNumber = 1;
+    private static readonly int BadFacilitiesNumber = 0;
 
     public FacilitiesAttribute FacilitiesAttribute = new FacilitiesAttribute();
 
     [Fact]
-    public void Test_FacilitiesNumberAttribute_Good()
+    public void TestFacilitiesNumberAttributeGood()
     {
       var actual = FacilitiesAttribute.IsValid(GoodFacilitiesNumber);
 
       Assert.True(actual);
     }
     [Fact]
-    public void Test_FacilitiesNumberAttribute_Bad()
+    public void TestFacilitiesNumberAttributeBad()
     {
-        bool actual = true;
+      bool actual = true;
 
-        actual = FacilitiesAttribute.IsValid(BadFacilitiesNumber);
-        Assert.False(actual);
+      actual = FacilitiesAttribute.IsValid(BadFacilitiesNumber);
+      Assert.False(actual);
 
     }
   }

@@ -9,7 +9,7 @@ namespace RVTR.Lodging.Testing.Tests
 {
   public class SiteNameAttributeTest
   {
-    public static readonly string GoodSiteName = "1";
+    private static readonly string GoodSiteName = "1";
     public static readonly List<string> BadSiteName = new List<string>
     {
         null,
@@ -18,17 +18,17 @@ namespace RVTR.Lodging.Testing.Tests
     public SiteNameAttribute SiteNameAttribute = new SiteNameAttribute();
 
     [Fact]
-    public void Test_SiteNameAttribute_Good()
+    public void TestSiteNameAttributeGood()
     {
       var actual = SiteNameAttribute.IsValid(GoodSiteName);
 
       Assert.True(actual);
     }
     [Fact]
-    public void Test_SiteNameAttribute_Bad()
+    public void TestSiteNameAttributeBad()
     {
       bool actual = true;
-      foreach(var item in BadSiteName)
+      foreach (var item in BadSiteName)
       {
         actual = SiteNameAttribute.IsValid(item);
         Assert.False(actual);

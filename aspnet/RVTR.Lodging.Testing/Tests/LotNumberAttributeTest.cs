@@ -9,7 +9,7 @@ namespace RVTR.Lodging.Testing.Tests
 {
   public class LotNumberAttributeTest
   {
-    public static readonly string GoodLotNumber = "1";
+    private static readonly string GoodLotNumber = "1";
     public static readonly List<string> BadLotNumber = new List<string>
     {
         null,
@@ -19,17 +19,17 @@ namespace RVTR.Lodging.Testing.Tests
     public LotNumberAttribute LotNumberAttribute = new LotNumberAttribute();
 
     [Fact]
-    public void Test_LotNumberAttribute_Good()
+    public void TestLotNumberAttributeGood()
     {
       var actual = LotNumberAttribute.IsValid(GoodLotNumber);
 
       Assert.True(actual);
     }
     [Fact]
-    public void Test_LotNumberAttribute_Bad()
+    public void TestLotNumberAttributeBad()
     {
       bool actual = true;
-      foreach(var lotnumber in BadLotNumber)
+      foreach (var lotnumber in BadLotNumber)
       {
         actual = LotNumberAttribute.IsValid(lotnumber);
         Assert.False(actual);

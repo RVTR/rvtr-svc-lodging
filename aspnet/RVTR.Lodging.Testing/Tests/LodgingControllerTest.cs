@@ -25,7 +25,7 @@ namespace RVTR.Lodging.Testing.Tests
       repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == -1)).Throws(new KeyNotFoundException());
       repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 0)).ReturnsAsync(new List<LodgingModel>());
       repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 1)).ReturnsAsync((IEnumerable<LodgingModel>)null);
-      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 2)).ReturnsAsync(new [] {new LodgingModel() { EntityId = 2, AddressId = 2, Name = "name", Bathrooms = 1 }});
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 2)).ReturnsAsync(new[] { new LodgingModel() { EntityId = 2, AddressId = 2, Name = "name", Bathrooms = 1 } });
       unitOfWorkMock.Setup(m => m.Lodging).Returns(repositoryMock.Object);
 
       _logger = loggerMock.Object;
@@ -34,7 +34,7 @@ namespace RVTR.Lodging.Testing.Tests
     }
 
     [Fact]
-    public async void Test_Controller_Get()
+    public async void TestControllerGet()
     {
       var resultMany = await _controller.Get();
 
@@ -42,7 +42,7 @@ namespace RVTR.Lodging.Testing.Tests
     }
 
     [Fact]
-    public async void Test_Controller_GetID()
+    public async void TestControllerGetID()
     {
       var failResult = await _controller.Get(-1);
       var returnOneResult = await _controller.Get(2);
@@ -52,7 +52,7 @@ namespace RVTR.Lodging.Testing.Tests
     }
 
     [Fact]
-    public async void Test_Controller_Delete()
+    public async void TestControllerDelete()
     {
       var resultPass = await _controller.Delete(-1);
       var resultFail = await _controller.Delete(2);
@@ -62,7 +62,7 @@ namespace RVTR.Lodging.Testing.Tests
     }
 
     [Fact]
-    public async void Test_Controller_Post()
+    public async void TestControllerPost()
     {
       var resultPass = await _controller.Post(new LodgingModel());
 
@@ -70,7 +70,7 @@ namespace RVTR.Lodging.Testing.Tests
     }
 
     [Fact]
-    public async void Test_Controller_Put()
+    public async void TestControllerPut()
     {
       LodgingModel lodgingmodel = (await _unitOfWork.Lodging.SelectAsync(e => e.EntityId == 2)).FirstOrDefault();
 

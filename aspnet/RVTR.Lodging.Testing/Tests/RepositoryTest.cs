@@ -24,7 +24,7 @@ namespace RVTR.Lodging.Testing.Tests
 
     [Theory]
     [MemberData(nameof(Records))]
-    public async void Test_Repository_DeleteAsync(LodgingModel lodging, RentalModel rental, ReviewModel review, ImageModel image)
+    public async void TestRepositoryDeleteAsync(LodgingModel lodging, RentalModel rental, ReviewModel review, ImageModel image)
     {
       using (var ctx = new LodgingContext(Options))
       {
@@ -77,7 +77,7 @@ namespace RVTR.Lodging.Testing.Tests
 
     [Theory]
     [MemberData(nameof(Records))]
-    public async void Test_Repository_InsertAsync(LodgingModel lodging, RentalModel rental, ReviewModel review, ImageModel image)
+    public async void TestRepositoryInsertAsync(LodgingModel lodging, RentalModel rental, ReviewModel review, ImageModel image)
     {
       using (var ctx = new LodgingContext(Options))
       {
@@ -125,7 +125,7 @@ namespace RVTR.Lodging.Testing.Tests
     }
 
     [Fact]
-    public async void Test_Repository_SelectAsync()
+    public async void TestRepositorySelectAsync()
     {
       using (var ctx = new LodgingContext(Options))
       {
@@ -170,7 +170,7 @@ namespace RVTR.Lodging.Testing.Tests
 
     [Theory]
     [MemberData(nameof(Records))]
-    public async void Test_Repository_Update(LodgingModel lodging, RentalModel rental, ReviewModel review, ImageModel image)
+    public async void TestRepositoryUpdate(LodgingModel lodging, RentalModel rental, ReviewModel review, ImageModel image)
     {
       using (var ctx = new LodgingContext(Options))
       {
