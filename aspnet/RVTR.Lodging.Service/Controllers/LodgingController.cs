@@ -60,7 +60,7 @@ namespace RVTR.Lodging.Service.Controllers
       {
         _logger.LogInformation($"Getting a lodging @ id = {id}...");
         var lodging = (await _unitOfWork.Lodging.SelectAsync(e => e.EntityId == id)).FirstOrDefault();
-        
+
         return Ok(lodging);
       }
       catch (KeyNotFoundException e)
@@ -77,11 +77,12 @@ namespace RVTR.Lodging.Service.Controllers
     /// <param name="stateProvince">The state/province</param>
     /// <param name="country">The country</param>
     /// <param name="occupancy">The occupancy</param>
+    /// <param name="cars">The car capacity</param>
     /// <returns>The filtered Lodgings</returns>
     [HttpGet]
     [ProducesResponseType(typeof(IEnumerable<LodgingModel>), StatusCodes.Status200OK)]
     [Route("available")]
-    public async Task<IActionResult> Get(string city, string stateProvince, string country, int occupancy)
+    public async Task<IActionResult> Get(string city, string stateProvince, string country, int occupancy, int cars)
     {
       _logger.LogInformation($"Getting all available lodgings matching City: {city}, State: {stateProvince}, Country: {country}, Occupancy: {occupancy}...");
 
@@ -89,7 +90,7 @@ namespace RVTR.Lodging.Service.Controllers
         (e.Address.City.ToLower() == city.ToLower()) &&
         (e.Address.StateProvince.ToLower() == stateProvince.ToLower()) &&
         (e.Address.Country.ToLower() == country.ToLower()) &&
-        (e.Rentals.Any(r => r.Status == "Available" && r.Capacity >= occupancy))));
+        (e.Rentals.Any(r => r.Status == "Available" && r.Capacity.First(c => c.Type == "People").Quantity >= occupancy && r.Capacity.First(c => c.Type == "Cars").Quantity >= cars))));
     }
 
     /// <summary>

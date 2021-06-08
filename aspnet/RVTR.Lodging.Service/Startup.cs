@@ -64,12 +64,12 @@ namespace RVTR.Lodging.Service
         {
           options.EnableRetryOnFailure(3);
         });
-      }, ServiceLifetime.Transient);
+      }, ServiceLifetime.Scoped);
 
       services.AddScoped<ClientZipkinMiddleware>();
       services.AddScoped<IUnitOfWork, UnitOfWork>();
       services.AddSwaggerGen();
-      services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ClientSwaggerOptions>();
+      services.AddScoped<IConfigureOptions<SwaggerGenOptions>, ClientSwaggerOptions>();
       services.AddVersionedApiExplorer(options =>
       {
         options.GroupNameFormat = "VV";

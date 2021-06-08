@@ -61,6 +61,14 @@ namespace RVTR.Lodging.Context
     /// <param name="modelBuilder"></param>
     private void OnDataSeeding(ModelBuilder modelBuilder)
     {
+      modelBuilder.Entity<AddressModel>().HasData(new List<AddressModel>()
+      {
+        new AddressModel() { EntityId = 1, City = "Palm Bay", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "32908", StateProvince = "FL", Street = "750 Osmosis Dr SW" },
+        new AddressModel() { EntityId = 2, City = "Afton", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "22920", StateProvince = "VA", Street = "8801 Dick Woods Rd" },
+        new AddressModel() { EntityId = 3, City = "Hanna", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "84031", StateProvince = "UT", Street = "5761 Upper, Red Creek Rd" },
+        new AddressModel() { EntityId = 4, City = "Topanga", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "90290", StateProvince = "CA", Street = "101 S Topanga Canyon Blvd" },
+      });
+
       modelBuilder.Entity<LodgingModel>().HasData(new List<LodgingModel>()
       {
         new LodgingModel() { EntityId = 1, AddressId = 1, Name = "Dragon Fly", Bathrooms = 2 },
@@ -69,20 +77,33 @@ namespace RVTR.Lodging.Context
         new LodgingModel() { EntityId = 4, AddressId = 4, Name = "Lotus Belle", Bathrooms = 6 },
       });
 
+      modelBuilder.Entity<CapacityModel>().HasData(new List<CapacityModel>()
+      {
+        new CapacityModel() { EntityId = 1, Type = "Cars", Quantity = 2},
+        new CapacityModel() { EntityId = 2, Type = "Cars", Quantity = 4},
+        new CapacityModel() { EntityId = 3, Type = "Cars", Quantity = 6},
+        new CapacityModel() { EntityId = 4, Type = "People", Quantity = 4},
+        new CapacityModel() { EntityId = 5, Type = "People", Quantity = 6},
+        new CapacityModel() { EntityId = 6, Type = "People", Quantity = 8},
+        new CapacityModel() { EntityId = 7, Type = "People", Quantity = 10},
+        new CapacityModel() { EntityId = 8, Type = "People", Quantity = 12}
+      });
+
       modelBuilder.Entity<RentalModel>().HasData(new List<RentalModel>()
       {
-        new RentalModel() { EntityId = 1, LodgingModelId = 1, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, Capacity = 4, SiteName = "Tent", Size = "5x5" },
-        new RentalModel() { EntityId = 2, LodgingModelId = 1, LotNumber = "101", Status = "Available", Price = 300, DiscountedPrice = 280, Capacity = 5, SiteName = "RV", Size = "10x10" },
-        new RentalModel() { EntityId = 3, LodgingModelId = 1, LotNumber = "102", Status = "Booked", Price = 300, DiscountedPrice = 280, Capacity = 5, SiteName = "RV", Size = "10x10" },
-        new RentalModel() { EntityId = 4, LodgingModelId = 1, LotNumber = "103", Status = "Booked", Price = 100, DiscountedPrice = 70, Capacity = 4, SiteName = "Tent", Size = "5x5" },
-        new RentalModel() { EntityId = 5, LodgingModelId = 2, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, Capacity = 4, SiteName = "Tent", Size = "5x5" },
-        new RentalModel() { EntityId = 6, LodgingModelId = 2, LotNumber = "101", Status = "Available", Price = 300, DiscountedPrice = 280, Capacity = 5, SiteName = "RV", Size = "10x10" },
-        new RentalModel() { EntityId = 7, LodgingModelId = 2, LotNumber = "102", Status = "Booked", Price = 300, DiscountedPrice = 280, Capacity = 5, SiteName = "RV", Size = "10x10" },
-        new RentalModel() { EntityId = 8, LodgingModelId = 2, LotNumber = "103", Status = "Booked", Price = 100, DiscountedPrice = 70, Capacity = 4, SiteName = "Tent", Size = "5x5" },
-        new RentalModel() { EntityId = 9, LodgingModelId = 3, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, Capacity = 4, SiteName = "Tent", Size = "5x5" },
-        new RentalModel() { EntityId = 10, LodgingModelId = 3, LotNumber = "101", Status = "Booked", Price = 100, DiscountedPrice = 70, Capacity = 5, SiteName = "Tent", Size = "5x5"  },
-        new RentalModel() { EntityId = 11, LodgingModelId = 4, LotNumber = "100", Status = "Available", Price = 300, DiscountedPrice = 280, Capacity = 4, SiteName = "RV", Size = "10x10" },
-        new RentalModel() { EntityId = 12, LodgingModelId = 4, LotNumber = "101", Status = "Booked", Price = 300, DiscountedPrice = 280, Capacity = 5, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { EntityId = 1, LodgingModelId = 1, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, CapacityId = new List<int?>(){1, 4}, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { EntityId = 2, LodgingModelId = 1, LotNumber = "101", Status = "Available", Price = 300, DiscountedPrice = 280, CapacityId = new List<int?>(){1, 4}, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { EntityId = 3, LodgingModelId = 1, LotNumber = "102", Status = "Booked", Price = 300, DiscountedPrice = 280, CapacityId = new List<int?>(){1, 4}, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { EntityId = 4, LodgingModelId = 1, LotNumber = "103", Status = "Booked", Price = 100, DiscountedPrice = 70, CapacityId = new List<int?>(){1, 4}, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { EntityId = 5, LodgingModelId = 2, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, CapacityId = new List<int?>(){1, 4}, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { EntityId = 6, LodgingModelId = 2, LotNumber = "101", Status = "Available", Price = 300, DiscountedPrice = 280, CapacityId = new List<int?>(){1, 4}, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { EntityId = 7, LodgingModelId = 2, LotNumber = "102", Status = "Booked", Price = 300, DiscountedPrice = 280, CapacityId = new List<int?>(){1, 4}, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { EntityId = 8, LodgingModelId = 2, LotNumber = "103", Status = "Booked", Price = 100, DiscountedPrice = 70, CapacityId = new List<int?>(){1, 4}, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { EntityId = 9, LodgingModelId = 3, LotNumber = "100", Status = "Available", Price = 100, DiscountedPrice = 70, CapacityId = new List<int?>(){1, 4}, SiteName = "Tent", Size = "5x5" },
+        new RentalModel() { EntityId = 10, LodgingModelId = 3, LotNumber = "101", Status = "Booked", Price = 100, DiscountedPrice = 70, CapacityId = new List<int?>(){1, 4}, SiteName = "Tent", Size = "5x5"  },
+        new RentalModel() { EntityId = 11, LodgingModelId = 4, LotNumber = "100", Status = "Available", Price = 300, DiscountedPrice = 280, CapacityId = new List<int?>(){1, 4}, SiteName = "RV", Size = "10x10" },
+        new RentalModel() { EntityId = 12, LodgingModelId = 4, LotNumber = "101", Status = "Booked", Price = 300, DiscountedPrice = 280, CapacityId = new List<int?>(){1, 4}, SiteName = "RV", Size = "10x10" },
+
       });
 
       modelBuilder.Entity<ImageModel>().HasData(new List<ImageModel>()
@@ -118,14 +139,6 @@ namespace RVTR.Lodging.Context
         new ImageModel() {EntityId = 26, LodgingModelId = 4, ImageUri = "https://www.turbopass.com/3843-carousel/desert-sunset-experience.jpg"},
         new ImageModel() {EntityId = 27, LodgingModelId = 4, ImageUri = "https://www.kcet.org/sites/kl/files/atoms/article_atoms/www.kcet.org/living/travel/socal_wanderer/jumbo-rocks-campground-joshua-tree.jpeg"},
         new ImageModel() {EntityId = 28, LodgingModelId = 4, ImageUri = "https://upload.wikimedia.org/wikipedia/commons/6/67/Desert_Fox_Pups.jpg"},
-      });
-
-      modelBuilder.Entity<AddressModel>().HasData(new List<AddressModel>()
-      {
-        new AddressModel() { EntityId = 1, City = "Palm Bay", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "32908", StateProvince = "FL", Street = "750 Osmosis Dr SW" },
-        new AddressModel() { EntityId = 2, City = "Afton", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "22920", StateProvince = "VA", Street = "8801 Dick Woods Rd" },
-        new AddressModel() { EntityId = 3, City = "Hanna", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "84031", StateProvince = "UT", Street = "5761 Upper, Red Creek Rd" },
-        new AddressModel() { EntityId = 4, City = "Topanga", Country = "USA", Latitude = "38.0755", Longitude = "77.9889", PostalCode = "90290", StateProvince = "CA", Street = "101 S Topanga Canyon Blvd" },
       });
     }
   }

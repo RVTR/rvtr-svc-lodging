@@ -135,13 +135,13 @@ jobs:
       - if: startsWith(github.ref, 'refs/heads/main')
         name: docker_push_head
         run: |
-          docker image tag lodging ghcr.io/rvtr/rvtrx-api-lodging:main-aspnet-rest
-          docker image push ghcr.io/rvtr/rvtrx-api-lodging:main-aspnet-rest
+          docker image tag lodging ghcr.io/${GITHUB_REPOSITORY}:main-aspnet-rest
+          docker image push ghcr.io/${GITHUB_REPOSITORY}:main-aspnet-rest
       - if: startsWith(github.ref, 'refs/tags/')
         name: docker_push
         run: |
-          docker image tag lodging ghcr.io/rvtr/rvtrx-api-lodging:aspnet-rest
-          docker image push ghcr.io/rvtr/rvtrx-api-lodging:aspnet-rest
+          docker image tag lodging ghcr.io/${GITHUB_REPOSITORY}:aspnet-rest
+          docker image push ghcr.io/${GITHUB_REPOSITORY}:aspnet-rest
       - name: docker_logout
         run: docker logout
 
