@@ -141,7 +141,7 @@ jobs:
         name: docker_push
         run: |
           docker image tag lodging ghcr.io/${GITHUB_REPOSITORY}:aspnet-rest
-          docker image push ghcr.io/${GITHUB_REPOSITORY}g:aspnet-rest
+          docker image push ghcr.io/${GITHUB_REPOSITORY}:aspnet-rest
       - name: docker_logout
         run: docker logout
 
