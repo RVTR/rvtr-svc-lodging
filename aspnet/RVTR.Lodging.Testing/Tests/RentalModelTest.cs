@@ -19,7 +19,8 @@ namespace RVTR.Lodging.Testing.Tests
           DiscountedPrice = 0.0,
           LodgingModelId = 0,
           LotNumber = "1",
-          Capacity = new Dictionary<string, int>(){{"People", 16},{"Cars", 14}},
+          // Capacity = new Dictionary<string, int>(){{"People", 16}, {"Cars", 14}},
+          Capacity = new List<CapacityModel>(){new CapacityModel() {Type = "People", Quantity = 5}},
           SiteName = "Test_Campsite_Good",
           Size = "5ft x 5ft",
         }

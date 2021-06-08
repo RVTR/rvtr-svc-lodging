@@ -17,15 +17,8 @@ services:
   data:
     environment:
       POSTGRES_PASSWORD: LodgingData@2020
-    image: postgres:12
+    image: postgres:13-alpine
     networks:
       - lodgingly
-
-  trace:
-    image: openzipkin/zipkin-slim
-    networks:
-      - lodgingly
-    ports:
-      - 9002:9411
 
 version: '3.8'
