@@ -30,7 +30,7 @@ namespace RVTR.Lodging.Testing.Tests
       repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == -1)).Throws(new KeyNotFoundException());
       repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 0)).Throws(new Exception());
       repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 1)).ReturnsAsync((IEnumerable<ReviewModel>)null);
-      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 2)).ReturnsAsync(new []  { new ReviewModel() { EntityId = 2, Comment = "Random", DateCreated = DateTime.Now, Rating = 1 }});
+      repositoryMock.Setup(m => m.SelectAsync(e => e.EntityId == 2)).ReturnsAsync(new[] { new ReviewModel() { EntityId = 2, Comment = "Random", DateCreated = DateTime.Now, Rating = 1 } });
       repositoryMock.Setup(m => m.Update(It.IsAny<ReviewModel>()));
       unitOfWorkMock.Setup(m => m.Review).Returns(repositoryMock.Object);
 
@@ -40,7 +40,7 @@ namespace RVTR.Lodging.Testing.Tests
     }
 
     [Fact]
-    public async void Test_Controller_Delete()
+    public async void TestControllerDelete()
     {
       var resultFail = await _controller.Delete(-1);
       var resultPass = await _controller.Delete(2);
@@ -50,7 +50,7 @@ namespace RVTR.Lodging.Testing.Tests
     }
 
     [Fact]
-    public async void Test_Controller_Get()
+    public async void TestControllerGet()
     {
       var resultMany = await _controller.Get();
       var resultFail = await _controller.Get(-1);
@@ -62,7 +62,7 @@ namespace RVTR.Lodging.Testing.Tests
     }
 
     [Fact]
-    public async void Test_Controller_Post()
+    public async void TestControllerPost()
     {
       var resultPass = await _controller.Post(new ReviewModel());
 
@@ -70,7 +70,7 @@ namespace RVTR.Lodging.Testing.Tests
     }
 
     [Fact]
-    public async void Test_Controller_Put()
+    public async void TestControllerPut()
     {
       ReviewModel reviewmodel = (await _unitOfWork.Review.SelectAsync(e => e.EntityId == 2)).FirstOrDefault();
 

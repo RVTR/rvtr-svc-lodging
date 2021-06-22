@@ -10,7 +10,7 @@ namespace RVTR.Lodging.Testing.Tests
     private static readonly string _errorMessage = "Check In date has not occurred.";
 
     [Fact]
-    public void Test_Attribute_IsValid_True()
+    public void TestAttributeIsValidTrue()
     {
       var input = DateTime.Now.AddDays(-1);
       var attribute = new CheckInAttribute();
@@ -21,7 +21,7 @@ namespace RVTR.Lodging.Testing.Tests
     }
 
     [Fact]
-    public void Test_Attribute_IsValid_False()
+    public void TestAttributeIsValidFalse()
     {
       var input = DateTime.Now.AddDays(1);
       var attribute = new CheckInAttribute();

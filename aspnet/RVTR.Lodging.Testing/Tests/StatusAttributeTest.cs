@@ -9,26 +9,26 @@ namespace RVTR.Lodging.Testing.Tests
 {
   public class StatusAttributeTest
   {
-    public static readonly string GoodStatus = "Booked";
+    private static readonly string GoodStatus = "Booked";
     public static readonly List<string> BadStatus = new List<string>
     {
         null,
         "Booked123"
     };
-    public StatusAttribute StatusAttribute = new StatusAttribute();
+    private StatusAttribute StatusAttribute = new StatusAttribute();
 
     [Fact]
-    public void Test_StatusAttribute_Good()
+    public void TestStatusAttributeGood()
     {
       var actual = StatusAttribute.IsValid(GoodStatus);
 
       Assert.True(actual);
     }
     [Fact]
-    public void Test_StatusAttribute_Bad()
+    public void TestStatusAttributeBad()
     {
       bool actual = true;
-      foreach(var item in BadStatus)
+      foreach (var item in BadStatus)
       {
         actual = StatusAttribute.IsValid(item);
         Assert.False(actual);

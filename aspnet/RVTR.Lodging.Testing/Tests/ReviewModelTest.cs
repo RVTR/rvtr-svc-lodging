@@ -28,7 +28,7 @@ namespace RVTR.Lodging.Testing.Tests
 
     [Theory]
     [MemberData(nameof(Reviews))]
-    public void Test_Create_ReviewModel(ReviewModel review)
+    public void TestCreateReviewModel(ReviewModel review)
     {
       var validationContext = new ValidationContext(review);
       var actual = Validator.TryValidateObject(review, validationContext, null, true);
@@ -38,7 +38,7 @@ namespace RVTR.Lodging.Testing.Tests
 
     [Theory]
     [MemberData(nameof(Reviews))]
-    public void Test_Validate_ReviewModel(ReviewModel review)
+    public void TestValidateReviewModel(ReviewModel review)
     {
       var validationContext = new ValidationContext(review);
 

@@ -34,7 +34,7 @@ namespace RVTR.Lodging.Testing.Tests
     /// <param name="address"></param>
     [Theory]
     [MemberData(nameof(Addresses))]
-    public void Test_Create_AddressModel(AddressModel address)
+    public void TestCreateAddressModel(AddressModel address)
     {
       var validationContext = new ValidationContext(address);
       var actual = Validator.TryValidateObject(address, validationContext, null, true);
@@ -48,7 +48,7 @@ namespace RVTR.Lodging.Testing.Tests
     /// <param name="address"></param>
     [Theory]
     [MemberData(nameof(Addresses))]
-    public void Test_Validate_AddressModel(AddressModel address)
+    public void TestValidateAddressModel(AddressModel address)
     {
       var validationContext = new ValidationContext(address);
 

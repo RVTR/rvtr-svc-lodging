@@ -9,7 +9,7 @@ namespace RVTR.Lodging.Testing.Tests
 {
   public class SizeAttributeTest
   {
-    public static readonly string GoodSize = "10ft x 10ft";
+    private static readonly string GoodSize = "10ft x 10ft";
     public static readonly List<string> BadSize = new List<string>
     {
         null,
@@ -18,17 +18,17 @@ namespace RVTR.Lodging.Testing.Tests
     public SizeAttribute SizeAttribute = new SizeAttribute();
 
     [Fact]
-    public void Test_SizeAttribute_Good()
+    public void TestSizeAttributeGood()
     {
       var actual = SizeAttribute.IsValid(GoodSize);
 
       Assert.True(actual);
     }
     [Fact]
-    public void Test_SizeAttribute_Bad()
+    public void TestSizeAttributeBad()
     {
       bool actual = true;
-      foreach(var item in BadSize)
+      foreach (var item in BadSize)
       {
         actual = SizeAttribute.IsValid(item);
         Assert.False(actual);

@@ -28,7 +28,7 @@ namespace RVTR.Lodging.Testing.Tests
 
     [Theory]
     [MemberData(nameof(Rentals))]
-    public void Test_Create_RentalModel(RentalModel rental)
+    public void TestCreateRentalModel(RentalModel rental)
     {
       var validationContext = new ValidationContext(rental);
       var actual = Validator.TryValidateObject(rental, validationContext, null, true);
@@ -38,7 +38,7 @@ namespace RVTR.Lodging.Testing.Tests
 
     [Theory]
     [MemberData(nameof(Rentals))]
-    public void Test_Validate_RentalModel(RentalModel rental)
+    public void TestValidateRentalModel(RentalModel rental)
     {
       var validationContext = new ValidationContext(rental);
 
