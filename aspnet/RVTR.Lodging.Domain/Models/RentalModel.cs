@@ -9,7 +9,7 @@ namespace RVTR.Lodging.Domain.Models
   /// <summary>
   /// Represents the _Rental_ model
   /// </summary>
-  public class RentalModel : AEntity, IValidatableObject
+  public class RentalModel : AEntity, IValidatableObject 
   {
     /// <summary>
     /// The lot number of the rental model
