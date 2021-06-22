@@ -19,7 +19,7 @@ namespace RVTR.Lodging.Testing.Tests
           DiscountedPrice = 0.0,
           LodgingModelId = 0,
           LotNumber = "1",
-          Capacity = 5,
+          Capacity = new List<CapacityModel>() {new CapacityModel() {Type = "People", Quanitity = 5}},
           SiteName = "Test_Campsite_Good",
           Size = "5ft x 5ft",
         }

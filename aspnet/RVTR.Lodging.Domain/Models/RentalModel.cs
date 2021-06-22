@@ -46,11 +46,15 @@ namespace RVTR.Lodging.Domain.Models
     public int? LodgingModelId { get; set; }
 
     /// <summary>
+    /// The List of Id of Capacity Model
+    /// </summary>
+    /// <value></value>
+    public List<int> CapacityId { get; set; }
+    /// <summary>
     /// The capacity of the campsite
     /// </summary>
     /// <value></value>
-    [Range(1, 1000, ErrorMessage = "Capacity must be between 1 and 1000")]
-    public int Capacity { get; set; }
+    public List<CapacityModel> Capacity { get; set; }
 
     /// <summary>
     /// The name of the campsite
